@@ -12,7 +12,7 @@ try:
         from controllers.db_helper import db_helper
 except ModuleNotFoundError as err:
         print("Fixing sys path..")
-        sys.path.insert(0,PROJ_DIR_ABS_PATH)
+        sys.path.insert(0, PROJ_DIR_ABS_PATH)
 
 from models.record_types.Customer import Customer
 from models.record_types.Magazine import Magazine
