@@ -1,23 +1,25 @@
 QUERIES = {
-        "CHECK_PAYMENT": '''
+        "PAY_CHECK_TABLE": 
+                        '''
                         DROP TABLE IF EXISTS payment;
                         '''
         ,
-        "CHECK_SUBSCRIPTION": '''
+        "SUB_CHECK_TABLE": 
+                        '''
                         DROP TABLE IF EXISTS subscription;
                         '''
         ,
-        "CHECK_PROFILE": 
+        "PRO_CHECK_TABLE": 
                         '''
                         DROP TABLE IF EXISTS profile;
                         '''
         ,
-        "CHECK_CUSTOMER": 
+        "CUST_CHECK_TABLE": 
                         '''
                         DROP TABLE IF EXISTS customer;
                         '''
         ,
-        "CHECK_MAGAZINE": 
+        "MAG_CHECK_TABLE": 
                         '''
                         DROP TABLE IF EXISTS magazine;
                         '''

@@ -1,5 +1,5 @@
 QUERIES = {
-        "CREATE_MAGAZINE": 
+        "MAG_CREATE_TABLE": 
                         '''
                         CREATE TABLE IF NOT EXISTS magazine (
                         magID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -10,7 +10,7 @@ QUERIES = {
                         recCreateDate DATE DEFAULT (CURRENT_DATE)
                         );
                         ''',
-        "CREATE_CUSTOMER":
+        "CUST_CREATE_TABLE":
                         '''
                         CREATE TABLE IF NOT EXISTS customer (
                         custID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -21,7 +21,7 @@ QUERIES = {
                         recCreateDate DATE DEFAULT (CURRENT_DATE)
                         );
                         ''',
-        "CREATE_PROFILE": 
+        "PRO_CREATE_TABLE": 
                         '''
                         CREATE TABLE IF NOT EXISTS profile (
                         custContID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -39,7 +39,7 @@ QUERIES = {
                         CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID)
                         );
                         ''',
-        "CREATE_SUBSCRIPTION": 
+        "SUB_CREATE_TABLE": 
                         '''
                         CREATE TABLE IF NOT EXISTS subscription (
                         magID INTEGER NOT NULL,
@@ -53,7 +53,7 @@ QUERIES = {
                         CONSTRAINT FK_subscription_custID FOREIGN KEY (custID) REFERENCES customer(custID)
                         );
                         ''',
-        "CREATE_PAYMENT":
+        "PAY_CREATE_TABLE":
                         '''
                         CREATE TABLE IF NOT EXISTS payment (
                         cardCode INTEGER,
