@@ -1,4 +1,19 @@
 # import Python classes that represent the MySQL Tables
+# from record_types.Customer import Customer
+import sys
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
+
+PROJ_DIR_ABS_PATH = os.getenv("PROJ_DIR_ABS_PATH")
+
+try:
+        from controllers.db_helper import db_helper
+except ModuleNotFoundError as err:
+        print("Fixing sys path..")
+        sys.path.insert(0,PROJ_DIR_ABS_PATH)
+
 from models.record_types.Customer import Customer
 from models.record_types.Magazine import Magazine
 from models.record_types.Payment import Payment
