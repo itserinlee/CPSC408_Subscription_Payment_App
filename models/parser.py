@@ -34,49 +34,7 @@ class Parser():
                 self.profiles = []
                 self.subscriptions = []
 
-        # assigns column/attribute indexes from the csv file
         # ***** METHODS *****
-                # ***** METHODS *****
-        def process_agency(self):
-                with open(self.file_name, 'r') as file:
-                        # next skips the first line
-                        next(file)
-                        for index, curr_agency_line in enumerate(file, start=1): 
-                                # list of values from csv file
-                                curr_agency_line_list = curr_agency_line.strip().split(",")
-                                # print(curr_agency_line_list)
-                                self.process_agency_list(curr_agency_line_list)
-
-        def process_agency_list(self, curr_line_list):
-                # declare curr attr vars
-                curr_agen = None
-                curr_agen_org = None
-
-                for index, val in enumerate(curr_line_list):
-                        # assign curr attr values
-                        if index == self.agen_i:
-                                curr_agen = val
-                        elif index == self.agen_org_i:
-                                curr_agen_org = val
-                        else:
-                                pass
-                        
-                # ***** Create Agency Instances *****
-                curr_agen_inst = Agency(None, curr_agen, curr_agen_org)
-
-                # append model instances to their respective lists
-                if db_helper.is_duplicate_agency(curr_agen_inst.name, curr_agen_inst.origin, self.agencies) == False:
-                        self.agencies.append(curr_agen_inst)
-        
-        # given a list of agency ids, assign it to agency instance
-        def assign_agency_ids(self, agency_ids):
-                for index, curr_id in enumerate(agency_ids):
-                        self.agencies[index].set_id(curr_id)
-
-        # given a list of agency ids, assign it to agency instance
-        def assign_astronaut_ids(self, astronaut_ids):
-                for index, curr_id in enumerate(astronaut_ids):
-                        self.astronauts[index].set_id(curr_id)
 
         def process_file(self):
                 with open(self.file_name, 'r') as file:
@@ -124,41 +82,34 @@ class Parser():
                         self.subscriptions.append(cur_subscription)
                         
                 if db_helper.is_duplicate(cur_payment.pay_id, self.payments) == False:
-                        self.payments.append(cur_payment)
+                        self.payments.append(cur_payment)                  
+                        
+        def get_customer_by_id(self, id):
+                for cur_customer in self.customers:
+                        if cur_customer.get_id() == id:
+                                return cur_customer
+        
+        def get_payment_by_id(self, id):
+                for cur_payment in self.payments:
+                        if cur_payment.get_id() == id:
+                                return cur_payment
                 
-
-
-        # each AstroExpedition in the list is missing its respective Astronaut and Expedition
-        def process_astr_exp(self):
-                for index, curr_astro_exped in enumerate(self.astro_expeds):
-                              astronaut = self.get_astro_by_id(curr_astro_exped.astronaut_id)
-                              curr_astro_exped.astronaut = astronaut
-                              expedition = self.get_exped_by_id(curr_astro_exped.expedition_id)
-                              curr_astro_exped.expedition = expedition
-                              
-        # given an astro id, return astronaut
-        def get_astro_by_id(self, astro_id):
-                for curr_astro in self.astronauts:
-                        if curr_astro.id == astro_id:
-                                return curr_astro
-
-        # given an exped id, return expedition
-        def get_exped_by_id(self, exped_id):
-                for curr_exped in self.expeditions:
-                        if curr_exped.id == exped_id:
-                                return curr_exped
-
-        # invokes all process methods
-        def pre_process(self):
-                # assign col fields their respective col indexes
-                # self.assign_indexes()
-                # get and assign agency data from .csv file
-                self.process_agency()
-
-        # invokes all process methods
-        def process(self):
-                # get and assign data from .csv file
-                self.process_file()
+        
+        def get_profile_by_id(self, id):
+                for cur_profile in self.profiles:
+                        if cur_profile.get_id() == id:
+                                return cur_profile
+                
+        
+        def get_subscription_by_id(self, id):
+                for cur_subscription in self.subscriptions:
+                        if cur_subscription.get_id() == id:
+                                return cur_subscription
+                
+        def get_magazine_by_id(self, id):
+                for cur_magazine in self.magazines:
+                        if cur_magazine.get_id() == id:
+                                return cur_magazine
 
         def __str__(self) -> str:
             str = f"**********List of Customers:**********\n"

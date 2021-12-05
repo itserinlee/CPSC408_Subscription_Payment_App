@@ -2,7 +2,7 @@ from models.parser import Parser
 
 def main():
     p = Parser()
-    p.process()
+    p.process_file()
     print(p)
     
 if __name__ == "__main__":
