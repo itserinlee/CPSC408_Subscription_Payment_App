@@ -1,5 +1,5 @@
 # represents an Agency table of the DB
-class Customer():
+class Payment():
         def __init__(self, pay_id, sub_id, payment_amount, payment_date, payment_type, card_number, card_code, rec_create_stamp) -> None: #specified return type, this is void
                 self.pay_id = pay_id # primary key, payment id
                 self.sub_id = sub_id # foreign key to subscription that this payment belongs
@@ -12,9 +12,12 @@ class Customer():
 
         def set_id(self, pay_id):
                 self.pay_id = pay_id
+                
+        def get_id(self):
+                return self.pay_id
 
-        def get_fields(self):
-                if self.id == None:
+        def get_fields(self, return_id = False):
+                if self.pay_id == None or return_id == False:
                         return tuple([self.sub_id, self.payment_amount, self.payment_date, self.payment_type, self.card_number, self.card_code, self.rec_create_stamp])
                 return tuple([self.pay_id, self.sub_id, self.payment_amount, self.payment_date, self.payment_type, self.card_number, self.card_code, self.rec_create_stamp])
 

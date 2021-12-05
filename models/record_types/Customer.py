@@ -10,9 +10,12 @@ class Customer():
 
         def set_id(self, cust_id):
                 self.cust_id = cust_id
+                
+        def get_id(self):
+                return self.cust_id
 
-        def get_fields(self):
-                if self.id == None:
+        def get_fields(self, return_id = False):
+                if self.id == None or return_id == False:
                         return tuple([self.first_name, self.last_name, self.username, self.password, self.rec_create_stamp])
                 return tuple([self.cust_id, self.first_name, self.last_name, self.username, self.password, self.rec_create_stamp])
 

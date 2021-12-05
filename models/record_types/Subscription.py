@@ -1,5 +1,5 @@
 # represents an Agency table of the DB
-class Customer():
+class Subscription():
         def __init__(self, sub_id, mag_id, cust_id, num_magazines_mailed, payment_completed, start_date, end_date) -> None: #specified return type, this is void
                 self.sub_id = sub_id # primary key
                 self.mag_id = mag_id # foreign key (magazine) that this subscription belongs
@@ -12,9 +12,12 @@ class Customer():
 
         def set_id(self, sub_id):
                 self.sub_id = sub_id
+                
+        def get_id(self):
+                return self.sub_id
 
-        def get_fields(self):
-                if self.id == None:
+        def get_fields(self, return_id = False):
+                if self.sub_id == None or return_id == False:
                         return tuple([self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date, self.mag_id, self.cust_id])
                 return tuple([self.sub_id, self.mag_id, self.cust_id, self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date])
 

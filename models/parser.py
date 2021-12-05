@@ -1,15 +1,15 @@
 # import Python classes that represent the MySQL Tables
-from record_types.Customer import Customer
-from record_types.Magazine import Magazine
-from record_types.Payment import Payment
-from record_types.Profile import Profile
-from record_types.Subscription import Subscription
+from models.record_types.Customer import Customer
+from models.record_types.Magazine import Magazine
+from models.record_types.Payment import Payment
+from models.record_types.Profile import Profile
+from models.record_types.Subscription import Subscription
 # import helper
 from controllers.db_helper import db_helper
 
 # Python class for parsing the csv data into Python data structures
 class Parser():
-        def __init__(self, file_name="data/magazine.csv"):
+        def __init__(self, file_name="data/Flat.csv"):
                 self.temp_file = None
                 self.file_name = file_name
                 # validate file name is valid
@@ -26,15 +26,6 @@ class Parser():
                 self.temp_file = None
                 
                 # ***** FIELDS *****
-                self.exped_i = None
-                self.astro_i = None
-                self.age_i = None
-                self.gend_i = None
-                self.nat_i = None
-                self.dur_i = None
-                self.agen_i = None
-                self.agen_org_i = None
-                self.temp_file = None
 
                 # lists that store the instances of the tables
                 self.customers = []
@@ -44,29 +35,6 @@ class Parser():
                 self.subscriptions = []
 
         # assigns column/attribute indexes from the csv file
-        # def assign_indexes(self):
-        #         with open(self.file_name, 'r') as file:
-        #                 first_line_list = file.readline().strip().split(",")
-        #                 # print(first_line_list)
-        #                 for index, name in enumerate(first_line_list):
-        #                         if name == "Expedition":
-        #                                 self.exped_i = index
-        #                         elif name == "Astronaut":
-        #                                 self.astro_i = index
-        #                         elif name == "Age":
-        #                                 self.age_i = index
-        #                         elif name == "Gender":
-        #                                 self.gend_i = index
-        #                         elif name == "Nationality":
-        #                                 self.nat_i = index
-        #                         elif name == "Duration":
-        #                                 self.dur_i = index
-        #                         elif name == "Agency":
-        #                                 self.agen_i = index
-        #                         elif name == "agencyOrigin":
-        #                                 self.agen_org_i = index
-        #                         else:
-        #                                 pass
         # ***** METHODS *****
                 # ***** METHODS *****
         def process_agency(self):
@@ -118,39 +86,15 @@ class Parser():
                                 # list of values from csv file
                                 curr_line_list = curr_line.strip().split(",")
                                 # print(curr_line_list)
-                                self.process_curr_list(curr_line_list, index)
+                                self.process_curr_list(curr_line_list)
         
-        def process_curr_list(self, curr_line_list, curr_index):
+        def process_curr_list(self, curr_line_list):
                 # declare curr attr vars
-                curr_exped = None
-                curr_astro = None
-                curr_age = None
-                curr_gend = None
-                curr_nat = None
-                curr_dur = None
-                curr_agen = None
-                curr_agen_org = None
-
-                # for index, val in enumerate(curr_line_list):
-                #         # assign curr attr values
-                #         if index == self.exped_i:
-                #                 curr_exped = int(val)
-                #         elif index == self.astro_i:
-                #                 curr_astro = val
-                #         elif index == self.age_i:
-                #                 curr_age = int(val)
-                #         elif index == self.gend_i:
-                #                 curr_gend = val
-                #         elif index == self.nat_i:
-                #                 curr_nat = val
-                #         elif index == self.dur_i:
-                #                 curr_dur = int(val)
-                #         elif index == self.agen_i:
-                #                 curr_agen = val
-                #         elif index == self.agen_org_i:
-                #                 curr_agen_org = val
-                #         else:
-                #                 pass
+                cur_customer = None
+                cur_magazine = None
+                cur_profile = None
+                cur_subscription = None
+                cur_payment = None
                         
                 # ***** Create Model Instances *****
                 cur_customer = Customer(curr_line_list[0], curr_line_list[1], curr_line_list[2], curr_line_list[3],curr_line_list[4],curr_line_list[5])
@@ -164,23 +108,25 @@ class Parser():
                 cur_payment = Payment(curr_line_list[27], curr_line_list[22], curr_line_list[28], curr_line_list[30], curr_line_list[29], curr_line_list[31], curr_line_list[32], curr_line_list[33])
                 
                 
-                # instantiate expedition instance
-                curr_exped_inst = Expedition(curr_exped, curr_dur)
-                
-                # instantiate astronaut instance
-                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
-                        db_helper.get_agency_id(curr_agen, curr_agen_org, self.agencies))
-                curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
                 
                 # append model instances to their respective lists
-                if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
-                        self.expeditions.append(curr_exped_inst)
-                if db_helper.is_duplicate_astronaut(curr_astro_inst.name, curr_astro_inst.age, 
-                        curr_astro_inst.agency_id, self.astronauts) == False:
-                        self.astronauts.append(curr_astro_inst)
-                if db_helper.is_duplicate_astro_exped(curr_astro_exped_inst.expedition_id, 
-                        curr_astro_exped_inst.astronaut_id, self.astro_expeds) == False:
-                        self.astro_expeds.append(curr_astro_exped_inst)
+                        # these are only checked by iD
+                if db_helper.is_duplicate(cur_customer.cust_id, self.customers) == False:
+                        self.customers.append(cur_customer)
+                        
+                if db_helper.is_duplicate(cur_magazine.mag_id, self.magazines) == False:
+                        self.magazines.append(cur_magazine)
+                        
+                if db_helper.is_duplicate(cur_profile.cust_id, self.profiles) == False:
+                        self.profiles.append(cur_profile)
+                        
+                if db_helper.is_duplicate(cur_subscription.sub_id, self.subscriptions) == False:
+                        self.subscriptions.append(cur_subscription)
+                        
+                if db_helper.is_duplicate(cur_payment.pay_id, self.payments) == False:
+                        self.payments.append(cur_payment)
+                
+
 
         # each AstroExpedition in the list is missing its respective Astronaut and Expedition
         def process_astr_exp(self):
@@ -211,27 +157,29 @@ class Parser():
 
         # invokes all process methods
         def process(self):
-                # assign col fields their respective col indexes
-                # self.assign_indexes()
                 # get and assign data from .csv file
                 self.process_file()
 
         def __str__(self) -> str:
-            str = f"**********List of Agencies:**********\n"
-            agency_str = [i.__str__() for i in self.agencies]
-            for i in agency_str:
+            str = f"**********List of Customers:**********\n"
+            customer_str = [i.__str__() for i in self.customers]
+            for i in customer_str:
                     str += i
-            str += f"\n**********List of Expeditions:**********\n"
-            expedition_str = [i.__str__() for i in self.expeditions]
-            for i in expedition_str:
+            str += f"\n**********List of Payments:**********\n"
+            payment_str = [i.__str__() for i in self.payments]
+            for i in payment_str:
                     str += i
-            str += f"\n**********List of Astronauts:**********\n"
-            astronaut_str = [i.__str__() for i in self.astronauts]
-            for i in astronaut_str:
+            str += f"\n**********List of Profiles:**********\n"
+            profile_str = [i.__str__() for i in self.profiles]
+            for i in profile_str:
                     str += i
-            str += f"\n**********List of AstroExpeditions:**********\n"
-            astro_exp_str = [i.__str__() for i in self.astro_expeds]
-            for i in astro_exp_str:
+            str += f"\n**********List of Subscriptions:**********\n"
+            subscription_str = [i.__str__() for i in self.subscriptions]
+            for i in subscription_str:
+                    str += i
+            str += f"\n**********List of Magazines:**********\n"
+            magazine_str = [i.__str__() for i in self.magazines]
+            for i in magazine_str:
                     str += i
             return str
             
