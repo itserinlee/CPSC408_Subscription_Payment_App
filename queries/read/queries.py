@@ -1,7 +1,7 @@
 QUERIES = {
         "MAGS_GET_ALL":
                         '''
-                        SELECT *
+                        SELECT magazineName
                         FROM magazine;
                         ''',
         "MAG_BY_NAME": 
@@ -28,5 +28,16 @@ QUERIES = {
                         FROM magazine
                         GROUP BY category
                         ORDER BY AvgCost DESC;
+                        ''',
+        "CUST_GET_ALL":
+                        '''
+                        SELECT firstName, lastName, username
+                        FROM customer;
+                        ''',
+        "CUST_GET_BY_YEAR":
+                        '''
+                        SELECT COUNT(custID) AS CountOfCust
+                        FROM customer
+                        WHERE recCreateDate LIKE '(%s)-%';
                         '''
 }
