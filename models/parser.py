@@ -1,15 +1,15 @@
 # import Python classes that represent the MySQL Tables
-from models.agency import Agency
-from models.expedition import Expedition
-from models.astronaut import Astronaut
-from models.astro_expedition import AstroExpedition
-from models.staging_model import StagingModel
+from record_types.Customer import Customer
+from record_types.Magazine import Magazine
+from record_types.Payment import Payment
+from record_types.Profile import Profile
+from record_types.Subscription import Subscription
 # import helper
 from controllers.db_helper import db_helper
 
 # Python class for parsing the csv data into Python data structures
 class Parser():
-        def __init__(self, file_name="expeditionData.csv"):
+        def __init__(self, file_name="data/magazine.csv"):
                 self.temp_file = None
                 self.file_name = file_name
                 # validate file name is valid
@@ -24,6 +24,7 @@ class Parser():
                 finally:
                         self.temp_file.close()
                 self.temp_file = None
+                
                 # ***** FIELDS *****
                 self.exped_i = None
                 self.astro_i = None
@@ -36,10 +37,11 @@ class Parser():
                 self.temp_file = None
 
                 # lists that store the instances of the tables
-                self.agencies = []
-                self.expeditions = []
-                self.astronauts = []
-                self.astro_expeds = []
+                self.customers = []
+                self.magazines = []
+                self.payments = []
+                self.profiles = []
+                self.subscriptions = []
 
         # assigns column/attribute indexes from the csv file
         def assign_indexes(self):
@@ -71,7 +73,7 @@ class Parser():
                 with open(self.file_name, 'r') as file:
                         # next skips the first line
                         next(file)
-                        for index, curr_agency_line in enumerate(file, start=1):
+                        for index, curr_agency_line in enumerate(file, start=1): 
                                 # list of values from csv file
                                 curr_agency_line_list = curr_agency_line.strip().split(",")
                                 # print(curr_agency_line_list)
