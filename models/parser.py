@@ -44,29 +44,29 @@ class Parser():
                 self.subscriptions = []
 
         # assigns column/attribute indexes from the csv file
-        def assign_indexes(self):
-                with open(self.file_name, 'r') as file:
-                        first_line_list = file.readline().strip().split(",")
-                        # print(first_line_list)
-                        for index, name in enumerate(first_line_list):
-                                if name == "Expedition":
-                                        self.exped_i = index
-                                elif name == "Astronaut":
-                                        self.astro_i = index
-                                elif name == "Age":
-                                        self.age_i = index
-                                elif name == "Gender":
-                                        self.gend_i = index
-                                elif name == "Nationality":
-                                        self.nat_i = index
-                                elif name == "Duration":
-                                        self.dur_i = index
-                                elif name == "Agency":
-                                        self.agen_i = index
-                                elif name == "agencyOrigin":
-                                        self.agen_org_i = index
-                                else:
-                                        pass
+        # def assign_indexes(self):
+        #         with open(self.file_name, 'r') as file:
+        #                 first_line_list = file.readline().strip().split(",")
+        #                 # print(first_line_list)
+        #                 for index, name in enumerate(first_line_list):
+        #                         if name == "Expedition":
+        #                                 self.exped_i = index
+        #                         elif name == "Astronaut":
+        #                                 self.astro_i = index
+        #                         elif name == "Age":
+        #                                 self.age_i = index
+        #                         elif name == "Gender":
+        #                                 self.gend_i = index
+        #                         elif name == "Nationality":
+        #                                 self.nat_i = index
+        #                         elif name == "Duration":
+        #                                 self.dur_i = index
+        #                         elif name == "Agency":
+        #                                 self.agen_i = index
+        #                         elif name == "agencyOrigin":
+        #                                 self.agen_org_i = index
+        #                         else:
+        #                                 pass
         # ***** METHODS *****
                 # ***** METHODS *****
         def process_agency(self):
@@ -131,30 +131,42 @@ class Parser():
                 curr_agen = None
                 curr_agen_org = None
 
-                for index, val in enumerate(curr_line_list):
-                        # assign curr attr values
-                        if index == self.exped_i:
-                                curr_exped = int(val)
-                        elif index == self.astro_i:
-                                curr_astro = val
-                        elif index == self.age_i:
-                                curr_age = int(val)
-                        elif index == self.gend_i:
-                                curr_gend = val
-                        elif index == self.nat_i:
-                                curr_nat = val
-                        elif index == self.dur_i:
-                                curr_dur = int(val)
-                        elif index == self.agen_i:
-                                curr_agen = val
-                        elif index == self.agen_org_i:
-                                curr_agen_org = val
-                        else:
-                                pass
+                # for index, val in enumerate(curr_line_list):
+                #         # assign curr attr values
+                #         if index == self.exped_i:
+                #                 curr_exped = int(val)
+                #         elif index == self.astro_i:
+                #                 curr_astro = val
+                #         elif index == self.age_i:
+                #                 curr_age = int(val)
+                #         elif index == self.gend_i:
+                #                 curr_gend = val
+                #         elif index == self.nat_i:
+                #                 curr_nat = val
+                #         elif index == self.dur_i:
+                #                 curr_dur = int(val)
+                #         elif index == self.agen_i:
+                #                 curr_agen = val
+                #         elif index == self.agen_org_i:
+                #                 curr_agen_org = val
+                #         else:
+                #                 pass
                         
                 # ***** Create Model Instances *****
+                cur_customer = Customer(curr_line_list[0], curr_line_list[1], curr_line_list[2], curr_line_list[3],curr_line_list[4],curr_line_list[5])
+                
+                cur_magazine = Magazine(curr_line_list[6],curr_line_list[7],curr_line_list[8],curr_line_list[9],curr_line_list[10])
+                
+                cur_profile = Profile(curr_line_list[11], curr_line_list[0], curr_line_list[12], curr_line_list[13], curr_line_list[14], curr_line_list[15], curr_line_list[16], curr_line_list[17], curr_line_list[20], curr_line_list[21], curr_line_list[19], curr_line_list[18])
+                
+                cur_subscription = Subscription(curr_line_list[22], curr_line_list[6], curr_line_list[0], curr_line_list[23], curr_line_list[24], curr_line_list[25], curr_line_list[26])
+                
+                cur_payment = Payment(curr_line_list[27], curr_line_list[22], curr_line_list[28], curr_line_list[30], curr_line_list[29], curr_line_list[31], curr_line_list[32], curr_line_list[33])
+                
+                
                 # instantiate expedition instance
                 curr_exped_inst = Expedition(curr_exped, curr_dur)
+                
                 # instantiate astronaut instance
                 curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
                         db_helper.get_agency_id(curr_agen, curr_agen_org, self.agencies))
@@ -193,14 +205,14 @@ class Parser():
         # invokes all process methods
         def pre_process(self):
                 # assign col fields their respective col indexes
-                self.assign_indexes()
+                # self.assign_indexes()
                 # get and assign agency data from .csv file
                 self.process_agency()
 
         # invokes all process methods
         def process(self):
                 # assign col fields their respective col indexes
-                self.assign_indexes()
+                # self.assign_indexes()
                 # get and assign data from .csv file
                 self.process_file()
 
