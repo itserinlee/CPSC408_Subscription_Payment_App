@@ -68,7 +68,7 @@ class Parser():
                 
                 
                 # append model instances to their respective lists
-                        # these are only checked by iD
+                        # these are only checked by id, FIXME
                 if db_helper.is_duplicate(cur_customer.cust_id, self.customers) == False:
                         self.customers.append(cur_customer)
                         
