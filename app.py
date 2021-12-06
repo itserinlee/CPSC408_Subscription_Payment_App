@@ -25,6 +25,7 @@ def main():
     db.bulk_insert(CRE_QUERIES["SUB_INSERT_RECS"], db.records['subscription'])
     # assigning payment records
     db.assign_table_recs(parser.payments, "payment")
+    db.bulk_insert(CRE_QUERIES["PAY_INSERT_RECS"], db.records['payment'])
 
     db.print_records()
     db.destructor()

@@ -93,8 +93,8 @@ QUERIES = {
                         ''',
         "PAY_INSERT_RECS":
                         '''
-                        INSERT INTO subscription 
-                        (magID, custID, numMagsMailed, paymentCompleted, startDate, endDate)
-                        VALUES (%s, %s, %s, %s, %s, %s)
-                        ''',     
+                        INSERT INTO payment 
+                        (subID, paymentAmount, paymentDate, paymentType, cardNumber, cardCode, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        '''
 }
