@@ -18,7 +18,7 @@ class Subscription():
 
         def get_fields(self, return_id = False):
                 if self.sub_id == None or return_id == False:
-                        return tuple([self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date, self.mag_id, self.cust_id])
+                        return tuple([self.mag_id, self.cust_id, self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date])
                 return tuple([self.sub_id, self.mag_id, self.cust_id, self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date])
 
         def __str__(self) -> str:

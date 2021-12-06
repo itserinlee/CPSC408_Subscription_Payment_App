@@ -84,5 +84,17 @@ QUERIES = {
                         INSERT INTO profile 
                         (custID, phoneNum, zipCode, state, city, streetAddress, contactType, startDate, endDate, recStatus, recUpdateDate)
                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ''',
+        "SUB_INSERT_RECS":
                         '''
+                        INSERT INTO subscription 
+                        (magID, custID, numMagsMailed, paymentCompleted, startDate, endDate)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ''',
+        "PAY_INSERT_RECS":
+                        '''
+                        INSERT INTO subscription 
+                        (magID, custID, numMagsMailed, paymentCompleted, startDate, endDate)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ''',     
 }
