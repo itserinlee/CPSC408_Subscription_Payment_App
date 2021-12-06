@@ -22,6 +22,7 @@ def admin_options():
 def run_program(db):
     is_running = True
     exit = lambda: print("Goodbye"); False
+
     while is_running:
         user_choice = start_options()
         if user_choice == 1:

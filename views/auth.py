@@ -1,6 +1,8 @@
+from random import randint
 from controllers.ui_helper import ui_helper
 from queries.read.queries import QUERIES as RE_QUERIES
 from queries.create.queries import QUERIES as CRE_QUERIES
+from random_address import real_random_address
 
 AUTH_PW = "password"
 
@@ -57,4 +59,20 @@ def user_signup(db):
                         continue
                 db.single_insert(CRE_QUERIES["CUST_CREATE_NEW"], tuple([first_name, last_name, username, password]))
                 is_created = True
-                
+        cust_id = get_cust_id(username, db)
+        phone_no = ui_helper.get_phone_no()
+        print("For the sake of demonstration: a random state, city, street address, zip code, etc will be chosen...")
+        rand_add = real_random_address()
+        zip_code = rand_add['postalCode']
+        state = rand_add['state']
+        city = rand_add['city']
+        street_addr = rand_add['address1']
+        contact_type = randint(0,1)
+        print(f"Random Address generated: {street_addr} {city}, {state} {zip_code}")
+        print("Creating profile...")
+        db.single_insert(CRE_QUERIES["PRO_CREATE_NEW"], tuple([cust_id, phone_no, zip_code, state, city, street_addr, contact_type]))
+        print("Profile sucessfully created.")
+
+# user signup helper methods
+def get_cust_id(username, db):
+        return db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], tuple([username, ]), "username")[0]

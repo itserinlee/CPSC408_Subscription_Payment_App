@@ -103,4 +103,10 @@ QUERIES = {
                         (firstName, lastName, username, password)
                         VALUES (%s, %s, %s, %s)
                         ''',
+        "PRO_CREATE_NEW":
+                        '''
+                        INSERT INTO profile 
+                        (custID, phoneNum, zipCode, state, city, streetAddress, contactType)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ''',
 }

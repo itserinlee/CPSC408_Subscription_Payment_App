@@ -45,5 +45,5 @@ QUERIES = {
                         SELECT *
                         FROM customer
                         WHERE username = %(username)s;
-                        ''',
+                        '''
 }
