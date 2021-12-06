@@ -2,7 +2,7 @@ from os import stat
 
 # helper class for preparing data for db operations
 class db_helper():
-        
+
         # given a list of model instances, 
         # create list consisting of tuples of each model's fields 
         @staticmethod
