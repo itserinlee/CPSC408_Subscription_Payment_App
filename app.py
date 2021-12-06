@@ -9,14 +9,14 @@ def main():
     parser = Parser()
     # parses table records / instances into Python lists
     parser.process_file()
-    
     # assign the record lists to their respective MySQL tables
     # assigning magazine records
     db.assign_table_recs(parser.magazines, "magazine")
-    db.bulk_insert(CRE_QUERIES['MAG_INSERT_RECS'], db.records['magazine'])
+    db.bulk_insert(CRE_QUERIES['MAG_INSERT_RECS'], db.records["magazine"])
     # assigning customer records
     db.assign_table_recs(parser.customers, "customer")
-
+    db.bulk_insert(CRE_QUERIES["CUST_INSERT_RECS"], db.records['customer'])
+    
     db.print_records()
     db.destructor()
 

@@ -9,14 +9,13 @@ load_dotenv()
 
 class DB_Model():
         def __init__(self): # constructor with connection path to db
-                # print("in here")
                 # dict containing keys with a value of a list of their respective records
                 self.records = {
-                        "customers": None,
-                        "magazines": None,
-                        "payments": None,
-                        "profiles": None,
-                        "subscriptions": None
+                        "customer": None,
+                        "magazine": None,
+                        "payment": None,
+                        "profile": None,
+                        "subscription": None
                 }
                 try:
                         self.connection = mysql.connector.connect(
@@ -79,8 +78,6 @@ class DB_Model():
         # function for bulk inserting records
         def bulk_insert(self, query, records):
                 try:
-                        print("here")
-                        print(records[0])
                         self.cursor.executemany(query,records)
                         self.connection.commit()
                         print("Query executed..")

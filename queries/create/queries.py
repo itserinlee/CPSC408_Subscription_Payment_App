@@ -72,5 +72,11 @@ QUERIES = {
                         INSERT INTO magazine 
                         (magazineName, cost, category, recStatus, recCreateDate)
                         VALUES (%s, %s, %s, %s, %s)
+                        ''',
+        "CUST_INSERT_RECS":
+                        '''
+                        INSERT INTO customer 
+                        (firstName, lastName, username, password, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s)
                         '''
 }
