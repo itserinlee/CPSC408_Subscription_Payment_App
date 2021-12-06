@@ -75,7 +75,7 @@ class DB_Model():
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
         
-        # function to execute fetch records
+        # function to fetch a single record
         def get_record(self,query,payload, key):
                 try:
                         self.cursor.execute(query, {key: payload[0]})
@@ -83,6 +83,15 @@ class DB_Model():
                         return results
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
+
+        # function for bulk inserting records
+        def single_insert(self, query, record):
+                try:
+                        self.cursor.execute(query,record)
+                        self.connection.commit()
+                        print("Query executed..")
+                except Exception as err:
+                        print(f"Error: An error occurred in trying bulk insert records.\n{err}")
 
         # function for bulk inserting records
         def bulk_insert(self, query, records):

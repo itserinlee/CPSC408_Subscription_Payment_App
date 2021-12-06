@@ -1,5 +1,6 @@
 from controllers.ui_helper import ui_helper
 from queries.read.queries import QUERIES as RE_QUERIES
+from queries.create.queries import QUERIES as CRE_QUERIES
 
 AUTH_PW = "password"
 
@@ -54,5 +55,6 @@ def user_signup(db):
                 choice = ui_helper.get_choice([0,1], "Enter 1 to confirm your choices, 0 to restart:")
                 if choice == 0:
                         continue
+                db.single_insert(CRE_QUERIES["CUST_CREATE_NEW"], tuple([first_name, last_name, username, password]))
                 is_created = True
                 
