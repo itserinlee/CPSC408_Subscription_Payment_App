@@ -36,3 +36,22 @@ class ui_helper():
                                 continue
                         end_loop = True
                 return choice
+        
+        @staticmethod
+        def get_valid_year(yrs):
+                str_yrs = [str(i) for i in yrs]
+                is_valid = False
+                prt_years = ""
+                for y in yrs:
+                        str_add = str(y) + " "
+                        prt_years += str_add
+                user_year = ""
+                while is_valid == False:
+                        user_year = input(f"Choose one of the following years to filter magazine results by:\
+                        \n{prt_years}\n")
+                        if user_year in str_yrs:
+                                is_valid = True
+                        print(f"Error: Invalid choice, there is no magazine record for {user_year}")
+                        continue
+                return user_year        
+                

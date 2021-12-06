@@ -37,3 +37,21 @@ class db_helper():
                         return None
                 return str(t)
         
+        @staticmethod
+        def print_records(result, col_names):
+                print("\n******************************Results:******************************")
+                header = ""
+                for name in col_names:
+                        header += name
+                print(f"Columns: {header}")
+                if type(result) == list:
+                        for i, row in enumerate(result, start=1):
+                                curr_row = ""
+                                for col in row:
+                                        curr_col = str(col) + ", "
+                                        curr_row += curr_col
+                                print(f"Record {i}: {curr_row}")
+                else:
+                        print(f"Record 1: {result}")
+                print("\n")
+        

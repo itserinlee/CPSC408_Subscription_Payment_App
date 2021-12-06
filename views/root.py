@@ -34,7 +34,7 @@ def run_program(db):
             if admin_choice == 0:
                 is_running = exit()
             elif admin_choice == 1:
-                stat_options()
+                handle_stat_options(stat_options(), db)
             elif admin_choice == 2:
                 print("Redirecting you to the main menu...")
                 pass

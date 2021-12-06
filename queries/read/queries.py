@@ -16,11 +16,12 @@ QUERIES = {
                         FROM magazine
                         WHERE category LIKE "%(%s)%";
                         ''',
+                        # TODO fix this query
         "MAGS_COUNT_BY_YEAR":
                         '''
                         SELECT COUNT(magID) AS CountOfMag
                         FROM magazine
-                        WHERE recCreateDate LIKE '(%s)-%';
+                        WHERE recCreateDate LIKE %s-%;
                         ''',
         "MAGS_AVG_COST_BY_CAT":
                         '''
@@ -45,5 +46,10 @@ QUERIES = {
                         SELECT *
                         FROM customer
                         WHERE username = %(username)s;
+                        ''',
+        "MAGS_GET_DIST_YEARS":
+                        '''
+                        SELECT DISTINCT(YEAR(recCreateDate))
+                        FROM magazine;
                         '''
 }
