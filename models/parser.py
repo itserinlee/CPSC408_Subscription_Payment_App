@@ -72,8 +72,8 @@ class Parser():
                 # ***** Create Model Instances *****
                 cur_customer = Customer(curr_line_list[0], curr_line_list[1], curr_line_list[2], curr_line_list[3],curr_line_list[4],curr_line_list[5])
                 
-                cur_magazine = Magazine(curr_line_list[6],curr_line_list[7],curr_line_list[8],curr_line_list[9],curr_line_list[10])
-                
+                cur_magazine = Magazine(curr_line_list[6],curr_line_list[7],curr_line_list[8],curr_line_list[34],curr_line_list[9],curr_line_list[10])
+                print(cur_magazine)
                 cur_profile = Profile(curr_line_list[11], curr_line_list[0], curr_line_list[12], curr_line_list[13], curr_line_list[14], curr_line_list[15], curr_line_list[16], curr_line_list[17], curr_line_list[20], curr_line_list[21], curr_line_list[19], curr_line_list[18])
                 
                 cur_subscription = Subscription(curr_line_list[22], curr_line_list[6], curr_line_list[0], curr_line_list[23], curr_line_list[24], curr_line_list[25], curr_line_list[26])

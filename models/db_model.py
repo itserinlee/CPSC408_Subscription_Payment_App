@@ -79,6 +79,8 @@ class DB_Model():
         # function for bulk inserting records
         def bulk_insert(self, query, records):
                 try:
+                        print("here")
+                        print(records[0])
                         self.cursor.executemany(query,records)
                         self.connection.commit()
                         print("Query executed..")

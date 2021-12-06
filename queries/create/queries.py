@@ -66,5 +66,11 @@ QUERIES = {
                         recCreateDate DATE DEFAULT (CURRENT_DATE),
                         CONSTRAINT FK_subscription_subID FOREIGN KEY (subID) REFERENCES subscription(subID)
                         );
+                        ''',
+        "MAG_INSERT_RECS":
+                        '''
+                        INSERT INTO magazine 
+                        (magazineName, cost, category, recStatus, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s)
                         '''
 }

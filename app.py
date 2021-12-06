@@ -1,5 +1,6 @@
 from models.parser import Parser
 from models.db_model import DB_Model
+from queries.create.queries import QUERIES as CRE_QUERIES
 
 def main():
     # connects to MySQL DB, removes tables (if exits), and creates tables
@@ -12,6 +13,7 @@ def main():
     # assign the record lists to their respective MySQL tables
     # assigning magazine records
     db.assign_table_recs(parser.magazines, "magazine")
+    db.bulk_insert(CRE_QUERIES['MAG_INSERT_RECS'], db.records['magazine'])
     # assigning customer records
     db.assign_table_recs(parser.customers, "customer")
 
