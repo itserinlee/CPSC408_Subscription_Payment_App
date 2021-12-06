@@ -22,13 +22,13 @@ class Subscription():
                 return tuple([self.sub_id, self.mag_id, self.cust_id, self.num_magazines_mailed, self.payment_completed, self.start_date, self.end_date])
 
         def __str__(self) -> str:
-            str_ret = f"\nSubscription:\nID: {str(self.sub_id)}\n"
-            str_ret += f"\nMagazine ID: {self.mag_id}\n"
-            str_ret += f"\nCustomer ID: {str(self.cust_id)}\n"
-            str_ret += f"\nNumber of Magazines Mailed: {self.num_magazines_mailed}\n"
-            str_ret += f"\nPayment Completed?: {self.payment_completed}\n"
-            str_ret += f"\nStart Date: {str(self.start_date)}\n"
-            str_ret += f"\nEnd Date: {str(self.end_date)}\n"
+            str_ret = f"\nSubscription:\nID: {str(self.sub_id)}"
+            str_ret += f"\nMagazine ID: {self.mag_id}"
+            str_ret += f"\nCustomer ID: {str(self.cust_id)}"
+            str_ret += f"\nNumber of Magazines Mailed: {self.num_magazines_mailed}"
+            str_ret += f"\nPayment Completed?: {self.payment_completed}"
+            str_ret += f"\nStart Date: {str(self.start_date)}"
+            str_ret += f"\nEnd Date: {str(self.end_date)}"
 
             
             return str_ret

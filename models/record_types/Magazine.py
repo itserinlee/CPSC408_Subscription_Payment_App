@@ -19,10 +19,10 @@ class Magazine():
                 return tuple([self.mag_id, self.magazine_name, self.cost, self.rec_status, self.rec_create_stamp])
 
         def __str__(self) -> str:
-            str_ret = f"\nMagazine:\nID: {str(self.mag_id)}\n"
-            str_ret += f"\nName: {self.magazine_name}\n"
-            str_ret += f"\nCost: {self.cost}\n"
-            str_ret += f"\nMagazine Active?: {self.rec_status}\n"
-            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}\n"
+            str_ret = f"\nMagazine:\nID: {str(self.mag_id)}"
+            str_ret += f"\nName: {self.magazine_name}"
+            str_ret += f"\nCost: {self.cost}"
+            str_ret += f"\nMagazine Active?: {self.rec_status}"
+            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}"
             
             return str_ret

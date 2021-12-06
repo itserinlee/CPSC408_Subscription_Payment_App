@@ -20,11 +20,11 @@ class Customer():
                 return tuple([self.cust_id, self.first_name, self.last_name, self.username, self.password, self.rec_create_stamp])
 
         def __str__(self) -> str:
-            str_ret = f"\nCustomer:\nID: {str(self.cust_id)}\n"
-            str_ret += f"\nFirst Name: {self.first_name}\n"
-            str_ret += f"\nLast Name: {self.last_name}\n"
-            str_ret += f"\nUsername: {self.username}\n"
-            str_ret += f"\nPassword: {self.password}\n"
-            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}\n"
+            str_ret = f"\nCustomer:\nID: {str(self.cust_id)}"
+            str_ret += f"\nFirst Name: {self.first_name}"
+            str_ret += f"\nLast Name: {self.last_name}"
+            str_ret += f"\nUsername: {self.username}"
+            str_ret += f"\nPassword: {self.password}"
+            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}"
             
             return str_ret

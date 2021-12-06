@@ -22,13 +22,13 @@ class Payment():
                 return tuple([self.pay_id, self.sub_id, self.payment_amount, self.payment_date, self.payment_type, self.card_number, self.card_code, self.rec_create_stamp])
 
         def __str__(self) -> str:
-            str_ret = f"\nPayment:\nID: {str(self.pay_id)}\n"
-            str_ret += f"\nSubscription ID: {self.sub_id}\n"
-            str_ret += f"\nPayment Amount: {self.payment_amount}\n"
-            str_ret += f"\nPayment Date: {self.payment_date}\n"
-            str_ret += f"\nPayment Type: {self.payment_type}\n"
-            str_ret += f"\nCard Number: {self.card_number}\n"
-            str_ret += f"\nCard Security Code: {self.card_code}\n"
-            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}\n"
+            str_ret = f"\nPayment:\nID: {str(self.pay_id)}"
+            str_ret += f"\nSubscription ID: {self.sub_id}"
+            str_ret += f"\nPayment Amount: {self.payment_amount}"
+            str_ret += f"\nPayment Date: {self.payment_date}"
+            str_ret += f"\nPayment Type: {self.payment_type}"
+            str_ret += f"\nCard Number: {self.card_number}"
+            str_ret += f"\nCard Security Code: {self.card_code}"
+            str_ret += f"\nDate Record Created: {str(self.rec_create_stamp)}"
             
             return str_ret
