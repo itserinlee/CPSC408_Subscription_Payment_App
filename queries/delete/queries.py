@@ -23,4 +23,7 @@ QUERIES = {
                         '''
                         DROP TABLE IF EXISTS magazine;
                         '''
+        # TODO
+        # (User) create a query that deletes a user's account (deletes customer which should also delete the profile record - cascade)
+        # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }
