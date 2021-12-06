@@ -96,5 +96,11 @@ QUERIES = {
                         INSERT INTO payment 
                         (subID, paymentAmount, paymentDate, paymentType, cardNumber, cardCode, recCreateDate)
                         VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ''',
+        "CUST_CREATE_NEW":
                         '''
+                        INSERT INTO customer 
+                        (firstName, lastName, username, password)
+                        VALUES (%s, %s, %s, %s)
+                        ''',
 }

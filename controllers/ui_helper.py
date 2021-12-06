@@ -16,6 +16,7 @@ class ui_helper():
                                 continue
                         end_loop = True
                 return db_helper.str_to_int(choice)
+        
         @staticmethod
         def get_str(msg):
                 user_input = input(msg)
