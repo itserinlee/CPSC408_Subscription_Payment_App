@@ -15,7 +15,7 @@ class Customer():
                 return self.cust_id
 
         def get_fields(self, return_id = False):
-                if self.id == None or return_id == False:
+                if self.cust_id == None or return_id == False:
                         return tuple([self.first_name, self.last_name, self.username, self.password, self.rec_create_stamp])
                 return tuple([self.cust_id, self.first_name, self.last_name, self.username, self.password, self.rec_create_stamp])
 

@@ -19,3 +19,21 @@ class db_helper():
                                 return True
                 return False
         
+        @staticmethod
+        def str_to_int(s) -> int:
+                try:
+                        int(s)
+                except TypeError as err:
+                        print(f"Error: Cannot convert {s} to an int.\n{err}")
+                        return None
+                return int(s)
+
+        @staticmethod
+        def tuple_to_str(t) -> int:
+                try:
+                        str(t)
+                except TypeError as err:
+                        print(f"Error: Cannot convert {t} to a string.\n{err}")
+                        return None
+                return str(t)
+        

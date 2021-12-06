@@ -1,7 +1,8 @@
 import mysql.connector
 import os
 from controllers.db_helper import db_helper
-from queries import QUERIES
+from queries.delete.queries import QUERIES as DEL_QUERIES
+from queries.create.queries import QUERIES as CRE_QUERIES
 # Gets the MySQL DB credentials from a .env file
 from dotenv import load_dotenv
 load_dotenv()
@@ -11,10 +12,11 @@ class DB_Model():
                 # print("in here")
                 # dict containing keys with a value of a list of their respective records
                 self.records = {
-                        "agency": None,
-                        "expedition": None,
-                        "astronaut": None,
-                        "astro_expedition": None
+                        "customers": None,
+                        "magazines": None,
+                        "payments": None,
+                        "profiles": None,
+                        "subscriptions": None
                 }
                 try:
                         self.connection = mysql.connector.connect(
@@ -23,7 +25,8 @@ class DB_Model():
                                 user=os.getenv("user"),
                                 password=os.getenv("password"),
                                 database=os.getenv("database"),
-                                port=3306
+                                port=db_helper.str_to_int(os.getenv("port")),
+                                auth_plugin='mysql_native_password'
                         )
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
@@ -34,18 +37,20 @@ class DB_Model():
         
         # if the tables exist, they will be dropped
         def check_tables(self):
-                self.single_query(QUERIES["CHECK_ASTRO_EXPED"])
-                self.single_query(QUERIES["CHECK_ASTRONAUT"])
-                self.single_query(QUERIES["CHECK_EXPEDITION"])
-                self.single_query(QUERIES["CHECK_AGENCY"])
+                self.single_query(DEL_QUERIES["PAY_CHECK_TABLE"])
+                self.single_query(DEL_QUERIES["SUB_CHECK_TABLE"])
+                self.single_query(DEL_QUERIES["PRO_CHECK_TABLE"])
+                self.single_query(DEL_QUERIES["CUST_CHECK_TABLE"])
+                self.single_query(DEL_QUERIES["MAG_CHECK_TABLE"])
 
         # creates all of the tables
         def create_tables(self):
                 print("Creating tables...")
-                self.single_query(QUERIES["CREATE_AGENCY"])
-                self.single_query(QUERIES["CREATE_EXPEDITION"])
-                self.single_query(QUERIES["CREATE_ASTRONAUT"])
-                self.single_query(QUERIES["CREATE_ASTRO_EXPED"])
+                self.single_query(CRE_QUERIES["MAG_CREATE_TABLE"])
+                self.single_query(CRE_QUERIES["CUST_CREATE_TABLE"])
+                self.single_query(CRE_QUERIES["PRO_CREATE_TABLE"])
+                self.single_query(CRE_QUERIES["SUB_CREATE_TABLE"])
+                self.single_query(CRE_QUERIES["PAY_CREATE_TABLE"])
                 print("Tables have been created.")
 
         # function to execute a single query with no payload
@@ -79,6 +84,22 @@ class DB_Model():
                         print("Query executed..")
                 except Exception as err:
                         print(f"Error: An error occurred in trying bulk insert records.\n{err}")
+
+        def print_records(self):
+                record_lists = self.records.values()
+                if not any(record_lists):
+                        print("No records exit")
+                        return
+                str_p = "\n"
+                for key, value in self.records.items():
+                        if value != None:
+                                str_p += "\n"
+                                str_p += f"******************************List of {key}:******************************\n"
+                                for r in value:
+                                        str_p += "\n"
+                                        str_p += db_helper.tuple_to_str(r)
+                                str_p += "\n"
+                print(str_p)
 
        # close connection 
         def destructor(self):
