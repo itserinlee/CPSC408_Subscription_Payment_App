@@ -78,5 +78,11 @@ QUERIES = {
                         INSERT INTO customer 
                         (firstName, lastName, username, password, recCreateDate)
                         VALUES (%s, %s, %s, %s, %s)
+                        ''',
+        "PRO_INSERT_RECS":
+                        '''
+                        INSERT INTO profile 
+                        (custID, phoneNum, zipCode, state, city, streetAddress, contactType, startDate, endDate, recStatus, recUpdateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         '''
 }

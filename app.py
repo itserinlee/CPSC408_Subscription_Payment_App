@@ -17,6 +17,9 @@ def main():
     db.assign_table_recs(parser.customers, "customer")
     db.bulk_insert(CRE_QUERIES["CUST_INSERT_RECS"], db.records['customer'])
     
+    db.assign_table_recs(parser.profiles, "profile")
+    db.bulk_insert(CRE_QUERIES["PRO_INSERT_RECS"], db.records['profile'])
+
     db.print_records()
     db.destructor()
 
