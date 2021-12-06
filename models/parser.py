@@ -127,25 +127,41 @@ class Parser():
                                 return cur_magazine
 
         def __str__(self) -> str:
-            str = f"**********List of Customers:**********\n"
+            str = "\n"
+            str += f"******************************List of Customers:******************************\n"
             customer_str = [i.__str__() for i in self.customers]
             for i in customer_str:
                     str += i
-            str += f"\n**********List of Payments:**********\n"
+                    str += "\n"
+            str += "\n"
+
+            str += f"\n******************************List of Payments:******************************\n"
             payment_str = [i.__str__() for i in self.payments]
             for i in payment_str:
                     str += i
-            str += f"\n**********List of Profiles:**********\n"
+                    str += "\n"
+            str += "\n"
+
+            str += f"\n******************************List of Profiles:******************************\n"
             profile_str = [i.__str__() for i in self.profiles]
             for i in profile_str:
                     str += i
-            str += f"\n**********List of Subscriptions:**********\n"
+                    str += "\n"
+            str += "\n"
+
+            str += f"\n******************************List of Subscriptions:******************************\n"
             subscription_str = [i.__str__() for i in self.subscriptions]
             for i in subscription_str:
                     str += i
-            str += f"\n**********List of Magazines:**********\n"
+                    str += "\n"
+            str += "\n"
+
+            str += f"\n******************************List of Magazines:******************************\n"
             magazine_str = [i.__str__() for i in self.magazines]
             for i in magazine_str:
                     str += i
+                    str += "\n"
+            str += "\n"
+
             return str
             
