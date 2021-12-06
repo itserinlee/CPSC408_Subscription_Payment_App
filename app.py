@@ -1,6 +1,7 @@
 from models.parser import Parser
 from models.db_model import DB_Model
 from queries.create.queries import QUERIES as CRE_QUERIES
+from views.root import *
 
 def main():
     # connects to MySQL DB, removes tables (if exits), and creates tables
@@ -27,7 +28,9 @@ def main():
     db.assign_table_recs(parser.payments, "payment")
     db.bulk_insert(CRE_QUERIES["PAY_INSERT_RECS"], db.records['payment'])
 
-    db.print_records()
+    # db.print_records()
+
+    run_program(db)
     db.destructor()
 
 if __name__ == "__main__":

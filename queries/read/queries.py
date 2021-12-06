@@ -39,5 +39,11 @@ QUERIES = {
                         SELECT COUNT(custID) AS CountOfCust
                         FROM customer
                         WHERE recCreateDate LIKE '(%s)-%';
+                        ''',
+        "CUST_GET_BY_USERNAME":
                         '''
+                        SELECT *
+                        FROM customer
+                        WHERE username = '(%s)';
+                        ''',
 }
