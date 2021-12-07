@@ -27,33 +27,40 @@ columns = [
         "sub_payment_completed","sub_start_date","sub_end_date","pay_id","pay_amount",
         "pay_type","pay_date","pay_card_num","pay_card_code","pay_record_create_date","category"
         ]
-
+db = DB_Model()
 def gen_rand_data():
-        db = DB_Model()
+        
         
         mag_ids = helper.get_mag_ids(db)
-        print(mag_ids)
-
         cust_ids = helper.get_cust_ids(db)
-        print(cust_ids)
-
         pro_ids = helper.get_pro_ids(db)
-        print(pro_ids)
-
         subs_ids = helper.get_sub_ids(db)
-        print(subs_ids)
-
         pay_ids = helper.get_pay_ids(db)
-        print(pay_ids)
 
-        db.destructor()
+        cust_id = cust_ids[-1] + 1
+        cust_name = helper.gen_rand_name()
+        cust_first_name = cust_name["first"]
+        cust_last_name = cust_name["last"]
+        cust_username = helper.gen_rand_pw() + "-" + cust_first_name
+        cust_password = helper.gen_rand_pw()
+        cust_rec_create_date = helper.gen_rand_date()
+
+        print(f"{cust_id=}, {cust_first_name=}, {cust_last_name=}, {cust_username=}, {cust_password=}, {cust_rec_create_date=}")
+
+        
 
 pwo = PasswordGenerator()
 pwo.minlen = 4
 pwo.maxlen = 6
 pwo.minschars = 0
 
-for i in range(30):
-        print(helper.gen_rand_nandcat())
+for i in range(5):
+        gen_rand_data()
+
+# for i in range(30):
+#         print(helper.get_rand_name())
+#         print(names.get_full_name())
+#         print(helper.gen_rand_nandcat())
 
 # gen_rand_data()
+db.destructor()

@@ -34,7 +34,17 @@ class data_helper():
         def get_pay_ids(db):
                 return db.get_record_ids(RE_QUERIES["PAY_GET_IDS"])
 
+        # helper method for choosing a random id from a given list of ids
+        @staticmethod
+        def choose_rand_id(lst_ids):
+                return lst_ids[random.randrange(0, len(lst_ids) - 1)]
+        
         # helper methods for generating values for the different table attributes
+        @staticmethod
+        def gen_rand_name():
+                full_name = names.get_full_name().split()
+                return {'first': full_name[0], 'last': full_name[1]}
+
         @staticmethod
         def gen_rand_pw(pwo=pwo):
                 return pwo.generate()
