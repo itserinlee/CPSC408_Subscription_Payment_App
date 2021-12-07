@@ -75,6 +75,16 @@ class DB_Model():
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
         
+        # function that fetches the first element of tuple record which is always the id
+        def get_record_ids(self,query):
+                try:
+                        self.cursor.execute(query)
+                        results = self.cursor.fetchall()
+                        results = [i[0] for i in results]
+                        return results
+                except Exception as err:
+                        print(f"Error: An error occurred in trying execute a single query.\n{err}")
+        
         # function to fetch a single record
         def get_record(self,query,payload, key):
                 try:

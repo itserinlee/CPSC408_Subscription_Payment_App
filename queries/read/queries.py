@@ -51,5 +51,30 @@ QUERIES = {
                         '''
                         SELECT DISTINCT(YEAR(recCreateDate))
                         FROM magazine;
+                        ''',
+        "MAG_GET_IDS":
                         '''
+                        SELECT magID
+                        FROM magazine;
+                        ''',
+        "CUST_GET_IDS":
+                        '''
+                        SELECT custID
+                        FROM customer;
+                        ''',
+        "PRO_GET_IDS":
+                        '''
+                        SELECT custContID
+                        FROM profile;
+                        ''',
+        "SUB_GET_IDS":
+                        '''
+                        SELECT subID
+                        FROM subscription;
+                        ''',
+        "PAY_GET_IDS":
+                        '''
+                        SELECT payID
+                        FROM payment;
+                        ''',
 }
