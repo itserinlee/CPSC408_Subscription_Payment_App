@@ -1,3 +1,4 @@
+import ccard
 import names
 import datetime
 import random
@@ -46,8 +47,25 @@ class data_helper():
                 return {'first': full_name[0], 'last': full_name[1]}
 
         @staticmethod
+        def gen_rand_phoneno():
+                add_char = lambda n : "-"  if (n == 3 or n == 7) else str(random.randrange(0,10))
+                phone_no = ""
+                for i in range(13):
+                        phone_no += add_char(i)
+                return phone_no
+
+        @staticmethod
         def gen_rand_pw(pwo=pwo):
                 return pwo.generate()
+        
+        @staticmethod
+        def gen_valid_username(db, name=""):
+                username = data_helper.gen_rand_pw() + "-" + name
+                is_valid = db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], tuple([username, ]), "username") == None
+                while is_valid == False:
+                        username = data_helper.gen_rand_pw() + "-" + name
+                        is_valid = db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], tuple([username, ]), "username") == None
+                return username
 
         @staticmethod
         def gen_rand_status():
@@ -67,17 +85,17 @@ class data_helper():
                 days_between_dates = time_between_dates.days
                 random_number_of_days = random.randrange(days_between_dates)
                 random_date = start_date + datetime.timedelta(days=random_number_of_days)
-                return random_date
+                return str(random_date)
+        
+        @staticmethod
+        def gen_rand_enddate(start_date=""):
+                # TODO - ensure that the end_date is not before the start_date
+                lst = [data_helper.gen_rand_date(), None]
+                return lst[random.randrange(0, 1)]
         
         @staticmethod
         def gen_rand_addr():
                 return real_random_address()
-        # rand_add = real_random_address()
-        # zip_code = rand_add['postalCode']
-        # state = rand_add['state']
-        # city = rand_add['city']
-        # street_addr = rand_add['address1']
-        # contact_type = randint(0,1)
 
         @staticmethod
         def gen_rand_nandcat(categories=lst_categories):
@@ -85,3 +103,14 @@ class data_helper():
                 rand_cat = get_rand_cat()
                 rand_name = randomname.get_name(noun=(rand_cat))
                 return { "name": rand_name, "category": rand_cat } 
+
+        @staticmethod
+        def gen_rand_card():
+                return ccard.visa()
+
+        @staticmethod
+        def gen_rand_code():
+                code = ""
+                for i in range(4):
+                        code += str(random.randrange(0,9))
+                return code
