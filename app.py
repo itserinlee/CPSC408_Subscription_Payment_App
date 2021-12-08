@@ -27,21 +27,6 @@ def main():
     db.assign_table_recs(parser.payments, "payment")
     db.bulk_insert(CRE_QUERIES["PAY_INSERT_ALL"], db.records['payment'])
 
-    # assigning magazine records
-    # db.assign_table_recs(parser.magazines, "magazine")
-    # db.bulk_insert(CRE_QUERIES['MAG_INSERT_RECS'], db.records["magazine"])
-    # # assigning customer records
-    # db.assign_table_recs(parser.customers, "customer")
-    # db.bulk_insert(CRE_QUERIES["CUST_INSERT_RECS"], db.records['customer'])
-    # # assigning profile records
-    # db.assign_table_recs(parser.profiles, "profile")
-    # db.bulk_insert(CRE_QUERIES["PRO_INSERT_RECS"], db.records['profile'])
-    # # assigning subscription records
-    # db.assign_table_recs(parser.subscriptions, "subscription")
-    # db.bulk_insert(CRE_QUERIES["SUB_INSERT_RECS"], db.records['subscription'])
-    # # assigning payment records
-    # db.assign_table_recs(parser.payments, "payment")
-    # db.bulk_insert(CRE_QUERIES["PAY_INSERT_RECS"], db.records['payment'])
     run_program(db)
     db.destructor()
 
