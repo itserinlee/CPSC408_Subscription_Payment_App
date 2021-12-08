@@ -27,46 +27,50 @@ columns = [
         "pay_id","pay_amount","pay_type","pay_date","pay_card_num","pay_card_code","pay_record_create_date",
         "category"
         ]
-db = DB_Model()
-def gen_rand_data():
-        
-        
-        mag_ids = helper.get_mag_ids(db)
-        cust_ids = helper.get_cust_ids(db)
-        pro_ids = helper.get_pro_ids(db)
-        subs_ids = helper.get_sub_ids(db)
-        pay_ids = helper.get_pay_ids(db)
 
-        # magazine fields
-        mag_id = max(mag_ids) + 1
-        name_cat_dict =helper.gen_rand_nandcat()
-        mag_name = name_cat_dict["name"]
-        mag_cat = name_cat_dict["category"]
-        mag_rec_status = helper.gen_rand_status()
-        mag_create_date = helper.gen_rand_date()
-        print(f"******************Magazine******************\n:\
-        {mag_id=}, {mag_name=}, {mag_cat=}, {mag_rec_status=}, \
-        {mag_create_date=}")
+db = DB_Model(False)
+cust_ids = helper.get_cust_ids(db)
+pro_ids = helper.get_pro_ids(db)
+subs_ids = helper.get_sub_ids(db)
+pay_ids = helper.get_pay_ids(db)
+
+def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
+        mag_ids = helper.get_mag_ids(db)
 
         # customer fields
-        cust_id = max(cust_ids) + 1
+        cust_id = max(cust_ids) + iterator
         cust_name = helper.gen_rand_name()
         cust_first_name = cust_name["first"]
         cust_last_name = cust_name["last"]
         cust_username = helper.gen_valid_username(db, cust_first_name)
         cust_password = helper.gen_rand_pw()
         cust_rec_create_date = helper.gen_rand_date()
-        print(f"******************Customer******************:\
-        \n{cust_id=}, {cust_first_name=}, {cust_last_name=}, \
-        {cust_username=}, {cust_password=}, {cust_rec_create_date=}")
+        # print(f"******************Customer******************:\
+        # \n{cust_id=}, {cust_first_name=}, {cust_last_name=}, \
+        # {cust_username=}, {cust_password=}, {cust_rec_create_date=}")
+
+        # magazine fields
+        mag_id = max(mag_ids) + iterator
+        name_cat_dict =helper.gen_rand_nandcat()
+        mag_name = name_cat_dict["name"]
+        mag_cost = round(uniform(9.99, 29.99), 2)
+        mag_cat = name_cat_dict["category"]
+        mag_rec_status = helper.gen_rand_status()
+        mag_create_date = helper.gen_rand_date()
+        # print(f"******************Magazine******************\n:\
+        # {mag_id=}, {mag_name=}, {mag_cat=}, {mag_rec_status=}, \
+        # {mag_create_date=}")
 
         # profile fields
-        pro_id = max(pro_ids) + 1
+        pro_id = max(pro_ids) + iterator
         pro_phone = helper.gen_rand_phoneno()
         pro_addr_dict = helper.gen_rand_addr()
         pro_zip_code = pro_addr_dict["postalCode"]
         pro_state = pro_addr_dict["state"]
-        pro_city = pro_addr_dict["city"]
+        if pro_state == "VT" and "city" not in pro_addr_dict.keys():
+                pro_city = "Stowe"
+        else:
+                pro_city = pro_addr_dict["city"]
         pro_addr = pro_addr_dict["address1"]
         pro_contact = helper.gen_rand_status()
         pro_update_date = helper.gen_rand_date()
@@ -74,46 +78,49 @@ def gen_rand_data():
         pro_start_date = helper.gen_rand_date()
         pro_end_date = helper.gen_rand_date()
 
-        print(f"******************Profile******************:\
-        \n{pro_id=}, {pro_phone=}, {pro_addr=}, {pro_city=},\
-         {pro_state=}, {pro_zip_code=}, {pro_contact=}, {pro_update_date=}\
-         {pro_record_status=}, {pro_start_date=}, {pro_end_date=}")
+        # print(f"******************Profile******************:\
+        # \n{pro_id=}, {pro_phone=}, {pro_addr=}, {pro_city=},\
+        #  {pro_state=}, {pro_zip_code=}, {pro_contact=}, {pro_update_date=}\
+        #  {pro_record_status=}, {pro_start_date=}, {pro_end_date=}")
         
         # subscription fields
-        sub_id = max(subs_ids) + 1
+        sub_id = max(subs_ids) + iterator
         sub_num_mags_mailed = randrange(0,21)
         sub_payment_completed = helper.gen_rand_status()
         sub_start_date = helper.gen_rand_date()
         sub_end_date = helper.gen_rand_enddate()
-        print(f"******************Subscription******************:\
-        \n{sub_id=}, {sub_num_mags_mailed=}, {sub_payment_completed=},\
-        {sub_start_date=}, {sub_end_date=}")
+        # print(f"******************Subscription******************:\
+        # \n{sub_id=}, {sub_num_mags_mailed=}, {sub_payment_completed=},\
+        # {sub_start_date=}, {sub_end_date=}")
 
         # pay fields
-        pay_id = max(pay_ids) + 1
+        pay_id = max(pay_ids) + iterator
         pay_amount = round(uniform(9.99, 99.99), 2)
         pay_type = helper.gen_rand_status()
         pay_date = helper.gen_rand_date()
         pay_card_num = helper.gen_rand_card()
         pay_card_code = helper.gen_rand_code()
         pay_record_create_date = helper.gen_rand_date()
-        print(f"******************Payment******************:\
-        {pay_id=}, {pay_amount=}, {pay_type=}, {pay_date=} {pay_card_num=},\
-         {pay_card_code=}, {pay_record_create_date=}\n")
+        # print(f"******************Payment******************:\
+        # {pay_id=}, {pay_amount=}, {pay_type=}, {pay_date=} {pay_card_num=},\
+        #  {pay_card_code=}, {pay_record_create_date=}\n")
+
+        new_record = (cust_id, cust_first_name, cust_last_name, cust_username, cust_password, cust_rec_create_date,
+        mag_id, mag_name, mag_cost, mag_rec_status, mag_create_date,
+        pro_id, pro_phone, pro_zip_code, pro_state, pro_city, pro_addr,
+        pro_contact, pro_update_date, pro_record_status, pro_start_date, pro_end_date,
+        sub_id, sub_num_mags_mailed, sub_payment_completed, sub_start_date, sub_end_date,
+        pay_id, pay_amount, pay_type, pay_date, pay_card_num, pay_card_code, pay_record_create_date,
+        mag_cat)
 
         
+        return new_record
 
-# gen_rand_data()
-# for i in range(3):
-#         print(helper.gen_rand_phoneno())
+new_rand_records = []
+for i in range(0,11):
+        new_rand_records.append(gen_rand_data(i,
+        cust_ids, pro_ids, subs_ids, pay_ids))
 
-for i in range(2):
-       gen_rand_data()
+helper.write_data_csv(columns, new_rand_records)
 
-# for i in range(30):
-#         print(helper.get_rand_name())
-#         print(names.get_full_name())
-#         print(helper.gen_rand_nandcat())
-
-# gen_rand_data()
 db.destructor()

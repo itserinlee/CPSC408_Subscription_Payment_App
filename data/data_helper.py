@@ -114,3 +114,13 @@ class data_helper():
                 for i in range(4):
                         code += str(random.randrange(0,9))
                 return code
+        
+        @staticmethod
+        def write_data_csv(column_names, records=[], filename="data/RandData.csv"):
+                with open(filename, "w") as file:
+                        # put the column names
+                        file.write(",".join(column_names) + ",")
+                        # list of recs (each rec is a tuple)
+                        for rec in records:
+                                rec = [str(ele) for ele in rec]
+                                file.write(",".join(rec) + ",\n")

@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class DB_Model():
-        def __init__(self): # constructor with connection path to db
+        def __init__(self, delete_tables=True): # constructor with connection path to db
                 # dict containing keys with a value of a list of their respective records
                 self.records = {
                         "customer": None,
@@ -17,6 +17,7 @@ class DB_Model():
                         "profile": None,
                         "subscription": None
                 }
+                self.delete_tables = delete_tables
                 try:
                         self.connection = mysql.connector.connect(
                                 # the IP Address of GCP MySQL Instance
@@ -29,8 +30,9 @@ class DB_Model():
                         )
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
-                        self.check_tables()
-                        self.create_tables()
+                        if self.delete_tables == True:
+                                self.check_tables()
+                                self.create_tables()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
         
