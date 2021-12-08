@@ -65,7 +65,7 @@ class DB_Model():
         # assigns list of tuples to respective key of self.records dict
         def assign_table_recs(self, model_list, table_name):
                 table_name = str(table_name)
-                self.records[table_name] = db_helper.get_record_list(model_list)
+                self.records[table_name] = db_helper.get_record_list(model_list, True)
 
         # function to execute fetch records
         def get_records(self,query):

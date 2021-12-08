@@ -28,6 +28,8 @@ columns = [
         "category"
         ]
 
+get_max = lambda lst : 0 if len(lst) == 0 else max(lst)
+
 db = DB_Model(False)
 cust_ids = helper.get_cust_ids(db)
 pro_ids = helper.get_pro_ids(db)
@@ -38,7 +40,8 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         mag_ids = helper.get_mag_ids(db)
 
         # customer fields
-        cust_id = max(cust_ids) + iterator
+        # cust_id = max(cust_ids) + iterator
+        cust_id = get_max(cust_ids) + iterator
         cust_name = helper.gen_rand_name()
         cust_first_name = cust_name["first"]
         cust_last_name = cust_name["last"]
@@ -50,7 +53,8 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         # {cust_username=}, {cust_password=}, {cust_rec_create_date=}")
 
         # magazine fields
-        mag_id = max(mag_ids) + iterator
+        # mag_id = max(mag_ids) + iterator
+        mag_id = get_max(mag_ids) + iterator
         name_cat_dict =helper.gen_rand_nandcat()
         mag_name = name_cat_dict["name"]
         mag_cost = round(uniform(9.99, 29.99), 2)
@@ -62,7 +66,8 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         # {mag_create_date=}")
 
         # profile fields
-        pro_id = max(pro_ids) + iterator
+        # pro_id = max(pro_ids) + iterator
+        pro_id = get_max(pro_ids) + iterator
         pro_phone = helper.gen_rand_phoneno()
         pro_addr_dict = helper.gen_rand_addr()
         pro_zip_code = pro_addr_dict["postalCode"]
@@ -84,7 +89,8 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         #  {pro_record_status=}, {pro_start_date=}, {pro_end_date=}")
         
         # subscription fields
-        sub_id = max(subs_ids) + iterator
+        # sub_id = max(subs_ids) + iterator
+        sub_id = get_max(subs_ids) + iterator
         sub_num_mags_mailed = randrange(0,21)
         sub_payment_completed = helper.gen_rand_status()
         sub_start_date = helper.gen_rand_date()
@@ -94,7 +100,8 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         # {sub_start_date=}, {sub_end_date=}")
 
         # pay fields
-        pay_id = max(pay_ids) + iterator
+        # pay_id = max(pay_ids) + iterator
+        pay_id = get_max(pay_ids) + iterator
         pay_amount = round(uniform(9.99, 99.99), 2)
         pay_type = helper.gen_rand_status()
         pay_date = helper.gen_rand_date()
@@ -117,7 +124,7 @@ def gen_rand_data(iterator, cust_ids, pro_ids, subs_ids, pay_ids):
         return new_record
 
 new_rand_records = []
-for i in range(0,11):
+for i in range(1,501):
         new_rand_records.append(gen_rand_data(i,
         cust_ids, pro_ids, subs_ids, pay_ids))
 

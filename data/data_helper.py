@@ -12,6 +12,7 @@ from categories import CATEGORIES
 class data_helper():
         SEED=8
         pwo = PasswordGenerator()
+        pwo.excludelchars = ","
         pwo.minlen = 4
         pwo.maxlen = 6
         pwo.minschars = 0
@@ -50,7 +51,7 @@ class data_helper():
         def gen_rand_phoneno():
                 add_char = lambda n : "-"  if (n == 3 or n == 7) else str(random.randrange(0,10))
                 phone_no = ""
-                for i in range(13):
+                for i in range(12):
                         phone_no += add_char(i)
                 return phone_no
 
@@ -119,7 +120,7 @@ class data_helper():
         def write_data_csv(column_names, records=[], filename="data/RandData.csv"):
                 with open(filename, "w") as file:
                         # put the column names
-                        file.write(",".join(column_names) + ",")
+                        file.write(",".join(column_names) + ",\n")
                         # list of recs (each rec is a tuple)
                         for rec in records:
                                 rec = [str(ele) for ele in rec]

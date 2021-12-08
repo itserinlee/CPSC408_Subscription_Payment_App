@@ -6,10 +6,10 @@ class db_helper():
         # given a list of model instances, 
         # create list consisting of tuples of each model's fields 
         @staticmethod
-        def get_record_list(models):
+        def get_record_list(models, return_id=False):
                 rec_list = []
                 for m in models:
-                        rec_list.append(m.get_fields())
+                        rec_list.append(m.get_fields(return_id))
                 return rec_list
         
         @staticmethod

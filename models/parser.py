@@ -24,7 +24,7 @@ from controllers.db_helper import db_helper
 
 # Python class for parsing the csv data into Python data structures
 class Parser():
-        def __init__(self, file_name="data/Flat.csv"):
+        def __init__(self, file_name="data/RandData.csv"):
                 self.temp_file = None
                 self.file_name = file_name
                 # validate file name is valid
