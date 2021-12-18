@@ -15,9 +15,7 @@ cursor = connection.cursor()
 
 def reportForAdmin():
     '''
-    queries the database to generate a report for the admin of:
-    summary statistics
-    could also include the views based on index
+    queries the database to generate a report for the admin based on their last query
     '''
 
     query = '''
