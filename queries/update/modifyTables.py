@@ -1,5 +1,4 @@
 import mysql.connector
-import pprint
 
 
 connection = mysql.connector.connect(
