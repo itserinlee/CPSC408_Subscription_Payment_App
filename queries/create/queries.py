@@ -173,5 +173,21 @@ QUERIES = {
                                 s.subID AS sub_id, s.startDate AS start_date, s.endDate AS end_date
                                 FROM subscription AS s
                                 INNER JOIN magazine AS m ON m.magID = s.magID;
+                        ''',
+        "CREATE_INAME_MAG":
+                        '''
+                        CREATE INDEX mag_name ON magazine(magazineName);
+                        ''',
+        "CREATE_ICOST_MAG":
+                        '''
+                        CREATE INDEX mag_cost ON magazine(cost);
+                        ''',
+        "CREATE_ICAT_MAG":
+                        '''
+                        CREATE INDEX mag_cat ON magazine(category);
+                        ''',
+        "CREATE_IUSERNAME_CUST":
+                        '''
+                        CREATE INDEX cust_username ON customer(username);
                         '''
 }

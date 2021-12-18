@@ -22,14 +22,13 @@ def admin_login(db, starter_msg, exit_msg):
         session_running = True
         while session_running == True:
                 msg = starter_msg + exit_msg
-                admin_choice = ui_helper.get_choice([i for i in range(3)], msg + "1) View statistics\n2) Modify records")
+                admin_choice = ui_helper.get_choice([i for i in range(3)], msg + "1) View statistics\n2) Add index")
                 if admin_choice == 0:
                         session_running = False
                 elif admin_choice == 1:
                         admin.handle_stat_options(admin.stat_options(), db)
                 elif admin_choice == 2:
-                        print("Redirecting you to the main menu...")
-                        pass
+                        admin.handle_index_options(admin.index_options(), db)
 
 # method for user logging into the database
 def user_login(db):

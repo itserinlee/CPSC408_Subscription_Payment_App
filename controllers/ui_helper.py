@@ -72,5 +72,23 @@ class ui_helper():
                                 break
                         print(f"Error: Invalid choice, there is no city record for {user_city}")
                         continue
-                return user_city  
+                return user_city
+
+        @staticmethod
+        def get_valid_attr(attributes):
+                is_valid = False
+                prt_attrs = ""
+                for s in attributes:
+                        str_add = str(s) + " "
+                        prt_attrs += str_add
+                user_attr = ""
+                while is_valid == False:
+                        user_attr = input(f"Choose one of the following cities to filter customer results by:\
+                        \n{prt_attrs}\n")
+                        if user_attr in attributes:
+                                is_valid = True
+                                break
+                        print(f"Error: Invalid choice, there is no attribute choice - {user_attr}")
+                        continue
+                return user_attr    
                 

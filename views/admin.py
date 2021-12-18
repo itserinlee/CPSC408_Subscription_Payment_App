@@ -1,6 +1,8 @@
 from controllers.ui_helper import ui_helper
 from controllers.db_helper import db_helper
 from queries.read.queries import QUERIES as RE_QUERIES
+from queries.delete.queries import QUERIES as DE_QUERIES
+from queries.create.queries import QUERIES as CE_QUERIES
 
 def stat_options():
         msg = "Choose from the following options:\n1) View all magazines.\
@@ -63,3 +65,55 @@ def view_all_magsub(db):
         db_helper.print_records(db.get_records(RE_QUERIES["GET_ALL_MAGSUB"]),
          ["mag_id mag_name mag_cost mag_category cust_id num_mags_received sub_id start_date end_date"])
 
+def index_options():
+        msg = "Choose which table would like to add an index from:\n1) Magazine.\
+                \n2) Customer.\n3) Profile. \
+                \n4) Payment.\n5) Subscription."
+        return db_helper.str_to_int(ui_helper.get_choice([i for i in range(1, 6)], msg=msg))
+
+def handle_index_options(choice, db):
+        if choice == 1:
+                create_mag_index(db)
+        elif choice == 2:
+                create_cust_index(db)
+        elif choice == 3:
+                print("Error: Indexing is not available for profile yet.\nThis will implemented in the future.")
+                pass
+        elif choice == 4:
+                print("Error: Indexing is not available for payment yet.\nThis will implemented in the future.")
+                pass
+        elif choice == 5:
+                print("Error: Indexing is not available for subscription yet.\nThis will implemented in the future.")
+                pass
+
+def create_mag_index(db):
+        index_attr = ui_helper.get_valid_attr(["magazineName", "cost", 
+        "category"])
+        index_name = ""
+        if index_attr == "magazineName":
+                index_name = "mag_name"
+        elif index_attr == "cost":
+                index_name = "mag_cost"
+        elif index_attr == "cost":
+                index_name = "mag_cat"
+        valid_index = db.get_records_payload(DE_QUERIES["CHECK_MAG_INDEX"], (index_name, ))
+        if len(valid_index) != 0:
+                print(f"Error an index named {index_name} on the magazine table for {index_attr} already exists.")
+                return
+        if index_name == "mag_name":
+                db.single_query(CE_QUERIES["CREATE_INAME_MAG"])
+        elif index_name == "mag_cost":
+                db.single_query(CE_QUERIES["CREATE_ICOST_MAG"])
+        elif index_name == "mag_cat":
+                db.single_query(CE_QUERIES["CREATE_ICAT_MAG"])
+
+def create_cust_index(db):
+        index_attr = ui_helper.get_valid_attr(["username"])
+        index_name = ""
+        if index_attr == "username":
+                index_name = "cust_username"
+        valid_index = db.get_records_payload(DE_QUERIES["CHECK_CUST_INDEX"], (index_name, ))
+        if len(valid_index) != 0:
+                print(f"Error an index named {index_name} on the customer table for {index_attr} already exists.")
+                return
+        db.single_query(CE_QUERIES["CREATE_IUSERNAME_CUST"])

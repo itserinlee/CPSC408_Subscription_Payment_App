@@ -146,7 +146,6 @@ class DB_Model():
 
         # function to execute fetch records
         def get_records_payload(self,query,payload):
-                print("here")
                 try:
                         self.cursor.execute(query, payload)
                         results = self.cursor.fetchall()

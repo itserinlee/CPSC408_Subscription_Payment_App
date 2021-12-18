@@ -47,6 +47,14 @@ QUERIES = {
         "CHECK_MAGSUB_VIEW":
                         '''
                         DROP VIEW IF EXISTS mag_sub_vw;
+                        ''',
+        "CHECK_MAG_INDEX":
+                        '''
+                        SHOW INDEX FROM magazine WHERE KEY_NAME = %s;
+                        ''',
+         "CHECK_CUST_INDEX":
+                        '''
+                        SHOW INDEX FROM customer WHERE KEY_NAME = %s;
                         '''
         # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }
