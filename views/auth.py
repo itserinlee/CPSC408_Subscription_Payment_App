@@ -2,6 +2,7 @@ from random import randint
 from controllers.ui_helper import ui_helper
 from queries.read.queries import QUERIES as RE_QUERIES
 from queries.create.queries import QUERIES as CRE_QUERIES
+from . import client
 from random_address import real_random_address
 
 AUTH_PW = "password"
@@ -33,6 +34,22 @@ def user_login(db):
                 print(f'''Correct, password. You are authenticated.
                 \nWelcome {username}!\n''')
                 is_authenticated = True
+        user_session = True
+        while user_session == True:
+                choice = client.present_options()
+                if choice == 0:
+                        break
+                elif choice == 1:
+                        # present subscriptions by username
+                        client.get_subscriptions(db, username)
+                elif choice == 2:
+                        # present magazine catalog
+                        client.display_mag_catalog(db)
+                # elif choice == 3:
+                #         # add magazine to subscription by username and mag_id
+                # elif choice == 4:
+                        # soft delete user account by username
+                continue
                 
 # user login helper methods
 def username_exists(username, db):

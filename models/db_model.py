@@ -95,7 +95,6 @@ class DB_Model():
                 try:
                         self.cursor.execute(query)
                         results = self.cursor.fetchall()
-                        # results = [i[0] for i in results]
                         return results
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
@@ -124,7 +123,6 @@ class DB_Model():
                 try:
                         self.cursor.execute(query, payload)
                         results = self.cursor.fetchall()
-                        results = [i[0] for i in results]
                         return results
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
