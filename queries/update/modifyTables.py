@@ -10,7 +10,7 @@ import pprint
 connection = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "",
+    password = "Nosplits35!",
     database = "final_project"
 )
 
@@ -52,69 +52,44 @@ def dataCleaner(path: str):
     return dataCleaned
 
 
-def modifyContactType(userInput: int, userID: int, staging: list):
+def modifyContactType(userInput: int, userID: int, staging: list):  # fulfills UPDATE requirement of project
     '''
     takes in a boolean value: 1 for text and 0 for call
     this function is to update a preference about the way customer is notified about subscription
-    this fulfills the UPDATE requirement of the project
     '''
 
     query = ''
-    profileData = list(set([(row[7], row[0]) for row in staging]))
+    # profileData = list(set([(row[7], row[0]) for row in staging]))    # not needed
 
-    # if userInput == 1:
-    #     query = "UDPATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
+    if userInput == 1:
+        query = "UPDATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
     
-    # elif userInput == 0:
-    #     # query = "UDPATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
-    #     query = "UDPATE profile SET contactType = ? WHERE custContID = ?"
-
-    cursor.executemany("UDPATE profile SET contactType := userInput WHERE custContID := userID", profileData)
-    # cursor.execute(query)
-    connection.commit()
-
-
-def modifyPaymentCompleted(username: str, staging: list):
-    '''
-    first, this needs knowledge of the login credentials from the customer table
-    needs to check last payment date in the payment table
-    then would check the value of payment amount
-    if that amount was 0 at the last recorded date, then the payment was not completed
-    update the value of the attribute paymentComplete in subscription table
-    '''
-
-    query = '''
-    SELECT paymentDate, paymentAmount
-    FROM customer AS c
-    WHERE username := username
-    INNER JOIN subscription AS s
-    ON c.custID = s.custID
-    INNER JOIN payment AS p
-    ON s.subID = p.subID
-    ORDER BY paymentDate DESC
-    LIMIT 1
-    '''
+    elif userInput == 0:
+        query = "UPDATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
+        # query = "UPDATE profile SET contactType = ? WHERE custContID = ?"
+        # query = "UPDATE profile SET contactType = userInput WHERE custContID = userID"
 
     cursor.execute(query)
-    result = cursor.fetchall()
+    connection.commit()
 
-    return result
+    print(f'{cursor.rowcount} record(s) updated')
+    print(f'Process completed.')
 
 
-def loadStagingCSV():
+def loadStagingCSV(path: str):
     '''
     reads in & parses Profile.CSV using dataCleaner() function
     loading this CSV into a list to be passed throughout program is used in lieu of inserting data via staging table
     '''
 
-    staging = dataCleaner('../../data/Profile.csv')
+    staging = dataCleaner(path)
     staging = staging[1:]                                                  # this throws away the headers of the CSV
 
     return staging
 
 
 # set up
-receiveStaging = loadStagingCSV()
+receiveStaging = loadStagingCSV('../../data/Profile.csv')
 
 # gets input
 print(f'How do you want to receive notifications about your subscription?')
@@ -122,9 +97,3 @@ userInput = input('Enter 1 for text or 0 for call: ')
 userID = input('Enter your ID to update your preferences: ')
 # invoke function
 modifyContactType(int(userInput), int(userID), receiveStaging)
-
-# gets input
-print(f'Checking if last payment was completed.')
-username = input('Enter your username: ')
-# invokes function
-modifyPaymentCompleted(username, receiveStaging)
