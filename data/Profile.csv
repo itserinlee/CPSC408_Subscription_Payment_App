@@ -1,4 +1,4 @@
-prof_cust_cont_id,prof_cust_id,prof_phone,prof_zip,prof_state,prof_city,prof_street_address,prof_contact_type,prof_record_update_stamp,prof_record_status,prof_start_date,prof_end_date
+custContID,custID,phoneNum,zipCode,state,city,streetAddress,contactType,recUpdateDate,recStatus,startDate,endDate
 1,1,000-000-0001,90000,CA,Orange,123 Orange Way,1,2013-10-16,1,2013-10-10,2013-10-16
 2,2,000-000-0002,90001,CA,Orange,456 Jersey Ave,1,2013-10-16,1,2013-10-10,2013-10-16
 3,3,000-000-0003,90002,CA,Cypress,789 Kaggle Street,0,2013-10-16,1,2013-10-10,2013-10-16

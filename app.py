@@ -3,6 +3,7 @@ from models.db_model import DB_Model
 from queries.create.queries import QUERIES as CRE_QUERIES
 from views.root import run_program
 
+
 def main():
     # connects to MySQL DB, removes tables (if exits), and creates tables
     db = DB_Model()

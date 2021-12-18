@@ -1,4 +1,5 @@
 import mysql.connector
+print(f'{mysql.connector=}')
 import os
 from controllers.db_helper import db_helper
 from queries.delete.queries import QUERIES as DEL_QUERIES
