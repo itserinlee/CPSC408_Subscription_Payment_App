@@ -3,12 +3,13 @@ from controllers.ui_helper import ui_helper
 from queries.read.queries import QUERIES as RE_QUERIES
 from queries.create.queries import QUERIES as CRE_QUERIES
 from . import client
+from . import admin
 from random_address import real_random_address
 
 AUTH_PW = "password"
 
 # method for authenticating the admin user
-def admin_login():
+def admin_login(db, starter_msg, exit_msg):
         pw = ui_helper.get_str("Please enter admin password:\n")
         is_authenticated = False
         while is_authenticated == False:
@@ -18,9 +19,21 @@ def admin_login():
                 else:
                         pw = ui_helper.get_str("Error: Incorrect, password. Please re-enter password:\n")
                         continue
+        session_running = True
+        while session_running == True:
+                msg = starter_msg + exit_msg
+                admin_choice = ui_helper.get_choice([i for i in range(3)], msg + "1) View statistics\n2) Modify records")
+                if admin_choice == 0:
+                        session_running = False
+                elif admin_choice == 1:
+                        admin.handle_stat_options(admin.stat_options(), db)
+                elif admin_choice == 2:
+                        print("Redirecting you to the main menu...")
+                        pass
 
 # method for user logging into the database
 def user_login(db):
+        # TODO check if user is inactive, and ask if they want to re-activate account
         username = ui_helper.get_str("Please enter your username:\n")
         is_authenticated = False
         while is_authenticated == False:
@@ -29,7 +42,7 @@ def user_login(db):
                         continue
                 password = ui_helper.get_str("Please enter your password:\n")
                 if password != get_user_password(username, db):
-                        print("Error: Incorrect password - please try again, goodbye.")
+                        print("Error: Incorrect password - please try again.")
                         continue
                 print(f'''Correct, password. You are authenticated.
                 \nWelcome {username}!\n''')
@@ -47,8 +60,13 @@ def user_login(db):
                         client.display_mag_catalog(db)
                 # elif choice == 3:
                 #         # add magazine to subscription by username and mag_id
-                # elif choice == 4:
+                elif choice == 4:
+                        # update contact method (0 - )
+                        client.update_contact_type(db, username)
+                elif choice == 5:
                         # soft delete user account by username
+                        client.delete_account(db, username)
+                        break
                 continue
                 
 # user login helper methods

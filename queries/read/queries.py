@@ -26,7 +26,7 @@ QUERIES = {
                         '''
                         SELECT COUNT(magID) AS CountOfMag
                         FROM magazine
-                        WHERE recCreateDate LIKE %s-%;
+                        WHERE recCreateDate LIKE %s;
                         ''',
         "MAGS_AVG_COST_BY_CAT":
                         '''

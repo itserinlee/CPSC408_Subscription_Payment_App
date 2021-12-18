@@ -53,5 +53,6 @@ class ui_helper():
                                 is_valid = True
                         print(f"Error: Invalid choice, there is no magazine record for {user_year}")
                         continue
+                print("here")
                 return user_year        
                 
