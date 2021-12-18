@@ -39,7 +39,7 @@ class db_helper():
         
         @staticmethod
         def print_records(result, col_names):
-                print("\n******************************Results:******************************")
+                print("\n****************************** Results: ******************************")
                 header = ""
                 for name in col_names:
                         header += name

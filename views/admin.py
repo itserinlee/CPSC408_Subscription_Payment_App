@@ -47,6 +47,5 @@ def print_customers_by_city(db):
         results = []
         for r in temp_results:
                 results = [e for e in r.fetchall()]
-        print(f"RESULTS: {results}")
         db_helper.print_records(results, ["customer_id full_name username date_joined"])
 
