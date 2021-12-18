@@ -9,7 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class DB_Model():
-        def __init__(self, delete_tables=True): # constructor with connection path to db
+        def __init__(self, parser, delete_tables=True): # constructor with connection path to db
+                # parser object that contains DB records as Python objects
+                self.parser = parser
                 # dict containing keys with a value of a list of their respective records
                 self.records = {
                         "customer": None,
@@ -34,8 +36,28 @@ class DB_Model():
                         if self.delete_tables == True:
                                 self.check_tables()
                                 self.create_tables()
+                                self.parse_data()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
+        
+        def parse_data(self):
+                # parses table records / instances into Python lists
+                self.parser.process_file()
+                self.assign_table_recs(self.parser.magazines, "magazine")
+                self.bulk_insert(CRE_QUERIES["MAG_INSERT_ALL"], self.records["magazine"])
+                # assigning customer records
+                self.assign_table_recs(self.parser.customers, "customer")
+                self.bulk_insert(CRE_QUERIES["CUST_INSERT_ALL"], self.records['customer'])
+                # # assigning profile records
+                self.assign_table_recs(self.parser.profiles, "profile")
+                self.bulk_insert(CRE_QUERIES["PRO_INSERT_ALL"], self.records['profile'])
+                # # assigning subscription records
+                self.assign_table_recs(self.parser.subscriptions, "subscription")
+                self.bulk_insert(CRE_QUERIES["SUB_INSERT_ALL"], self.records['subscription'])
+                # # assigning payment records
+                self.assign_table_recs(self.parser.payments, "payment")
+                self.bulk_insert(CRE_QUERIES["PAY_INSERT_ALL"], self.records['payment'])
+
         
         # if the tables exist, they will be dropped
         def check_tables(self):
