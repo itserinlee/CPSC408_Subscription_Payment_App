@@ -4,6 +4,11 @@ QUERIES = {
                         SELECT magazineName
                         FROM magazine;
                         ''',
+        "MAGS_GET_CATALOG":
+                '''
+                SELECT magID, magazineName, cost, category
+                FROM magazine;
+                ''',
         "MAG_BY_NAME": 
                         '''
                         SELECT *
@@ -21,7 +26,7 @@ QUERIES = {
                         '''
                         SELECT COUNT(magID) AS CountOfMag
                         FROM magazine
-                        WHERE recCreateDate LIKE %s-%;
+                        WHERE recCreateDate LIKE %s;
                         ''',
         "MAGS_AVG_COST_BY_CAT":
                         '''
@@ -46,6 +51,23 @@ QUERIES = {
                         SELECT *
                         FROM customer
                         WHERE username = %(username)s;
+                        ''',
+        "GET_DIST_CITIES":
+                        '''
+                        SELECT DISTINCT(city)
+                        FROM profile;
+                        ''',
+        "CALL_CITY_SP":
+                        '''
+                        CALL CustByCity(%s);
+                        ''',
+        "SUB_GET_BY_USERNAME":
+                        '''
+                        SELECT m.magazineName, m.cost, s.startDate, s.endDate
+                        FROM customer AS c
+                        INNER JOIN subscription AS s ON s.custID = c.custID
+                        INNER JOIN magazine AS m ON m.magID = s.magID
+                        WHERE c.username = %s;
                         ''',
         "MAGS_GET_DIST_YEARS":
                         '''

@@ -33,7 +33,7 @@ QUERIES = {
                         streetAddress VARCHAR(150) NOT NULL,
                         contactType BOOLEAN,
                         recUpdateDate DATE DEFAULT (CURRENT_DATE),
-                        recStatus BOOLEAN,
+                        recStatus BOOLEAN DEFAULT FALSE,
                         startDate DATE,
                         endDate DATE,
                         CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID)
@@ -139,4 +139,16 @@ QUERIES = {
                         (custID, phoneNum, zipCode, state, city, streetAddress, contactType)
                         VALUES (%s, %s, %s, %s, %s, %s, %s)
                         ''',
+        "CREATE_CITY_TRIGGER":
+                '''
+                CREATE PROCEDURE CustByCity(
+                        IN city_name VARCHAR(50)
+                )
+                BEGIN
+                        SELECT c.custID AS customer_id, CONCAT(c.firstName, " ", c.lastName) AS full_name, c.username, c.recCreateDate AS date_joined
+                        FROM customer AS c
+                        INNER JOIN profile AS p ON p.custID = c.custID
+                        WHERE p.city = city_name;
+                END
+                '''
 }

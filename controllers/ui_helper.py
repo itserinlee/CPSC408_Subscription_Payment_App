@@ -53,5 +53,24 @@ class ui_helper():
                                 is_valid = True
                         print(f"Error: Invalid choice, there is no magazine record for {user_year}")
                         continue
-                return user_year        
+                return user_year
+
+        @staticmethod
+        def get_valid_city(cities):
+                cits = [s for s in cities]
+                is_valid = False
+                prt_cities = ""
+                for s in cits:
+                        str_add = str(s) + " "
+                        prt_cities += str_add
+                user_city = ""
+                while is_valid == False:
+                        user_city = input(f"Choose one of the following cities to filter customer results by:\
+                        \n{prt_cities}\n")
+                        if user_city in cits:
+                                is_valid = True
+                                break
+                        print(f"Error: Invalid choice, there is no city record for {user_city}")
+                        continue
+                return user_city  
                 

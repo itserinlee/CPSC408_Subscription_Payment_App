@@ -28,16 +28,6 @@ def run_program(db):
                 user_signup(db)
                 print("Redirecting you to the main menu...")
         elif user_choice == 2:
-            admin_login()
-            msg = starter_msg + exit_msg
-            admin_choice = ui_helper.get_choice([i for i in range(3)], msg + "1) View statistics\n2) Modify records")
-            if admin_choice == 0:
-                is_running = exit()
-            elif admin_choice == 1:
-                handle_stat_options(stat_options(), db)
-            elif admin_choice == 2:
-                print("Redirecting you to the main menu...")
-                pass
+            admin_login(db, starter_msg, exit_msg)
         elif user_choice == 0:
-            # user_login(ui_helper.get_str("Please enter your username:\n"), db)
             is_running = exit()

@@ -22,8 +22,23 @@ QUERIES = {
         "MAG_CHECK_TABLE": 
                         '''
                         DROP TABLE IF EXISTS magazine;
-                        '''
+                        ''',
         # TODO
         # (User) create a query that deletes a user's account (deletes customer which should also delete the profile record - cascade)
+        "SOFT_DELETE":
+                        '''
+                        UPDATE profile
+                        SET recStatus = %s
+                        WHERE custContID IN (
+                                SELECT profile.custContID
+                                FROM customer c
+                                WHERE c.custID = profile.custID
+                                AND c.username = %s
+                        );
+                        ''',
+        "DROP_CITY_TRIGGER":
+                        '''
+                        DROP PROCEDURE IF EXISTS `CustByCity`
+                        '''
         # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }
