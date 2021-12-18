@@ -35,12 +35,12 @@ class DB_Model():
                         print("Connection made.")
                         if self.delete_tables == True:
                                 self.check_tables()
-                                self.check_procedures()
                                 self.check_views()
                                 self.create_tables()
-                                self.create_procedures()
                                 self.create_views()
                                 self.parse_data()
+                        self.check_procedures()
+                        self.create_procedures()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
         

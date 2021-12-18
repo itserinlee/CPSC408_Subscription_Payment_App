@@ -1,4 +1,5 @@
 from os import stat
+import pandas as pd
 
 # helper class for preparing data for db operations
 class db_helper():
@@ -54,5 +55,11 @@ class db_helper():
                         print("\n")
                 else:
                         print(result)
+        
+        @staticmethod
+        def generate_csv(result, col_names, file_path="admin_report.csv"):
+                if len(result) != 0:
+                        df = pd.DataFrame(result, columns=col_names)
+                        df.to_csv(file_path, index=False)   
                         
         
