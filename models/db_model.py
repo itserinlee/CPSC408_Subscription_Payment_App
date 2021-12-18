@@ -36,6 +36,7 @@ class DB_Model():
                         if self.delete_tables == True:
                                 self.check_tables()
                                 self.create_tables()
+                                self.create_triggers()
                                 self.parse_data()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
@@ -66,6 +67,7 @@ class DB_Model():
                 self.single_query(DEL_QUERIES["PRO_CHECK_TABLE"])
                 self.single_query(DEL_QUERIES["CUST_CHECK_TABLE"])
                 self.single_query(DEL_QUERIES["MAG_CHECK_TABLE"])
+                self.single_query(DEL_QUERIES["DROP_CITY_TRIGGER"])
 
         # creates all of the tables
         def create_tables(self):
@@ -76,6 +78,9 @@ class DB_Model():
                 self.single_query(CRE_QUERIES["SUB_CREATE_TABLE"])
                 self.single_query(CRE_QUERIES["PAY_CREATE_TABLE"])
                 print("Tables have been created.")
+        
+        def create_triggers(self):
+                self.single_query(self.single_query(CRE_QUERIES["CREATE_CITY_TRIGGER"]))
 
         # function to execute a single query with no payload
         def single_query(self,query):
@@ -128,6 +133,7 @@ class DB_Model():
 
         # function to execute fetch records
         def get_records_payload(self,query,payload):
+                print("here")
                 try:
                         self.cursor.execute(query, payload)
                         results = self.cursor.fetchall()

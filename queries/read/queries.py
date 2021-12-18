@@ -52,6 +52,15 @@ QUERIES = {
                         FROM customer
                         WHERE username = %(username)s;
                         ''',
+        "GET_DIST_CITIES":
+                        '''
+                        SELECT DISTINCT(city)
+                        FROM profile;
+                        ''',
+        "CALL_CITY_SP":
+                        '''
+                        CALL CustByCity(%s);
+                        ''',
         "SUB_GET_BY_USERNAME":
                         '''
                         SELECT m.magazineName, m.cost, s.startDate, s.endDate

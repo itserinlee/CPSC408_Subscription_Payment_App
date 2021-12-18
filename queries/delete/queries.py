@@ -35,6 +35,10 @@ QUERIES = {
                                 WHERE c.custID = profile.custID
                                 AND c.username = %s
                         );
+                        ''',
+        "DROP_CITY_TRIGGER":
+                        '''
+                        DROP PROCEDURE IF EXISTS `CustByCity`
                         '''
         # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }
