@@ -10,7 +10,7 @@ import pprint
 connection = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "",
+    password = "Nosplits35!",
     database = "final_project"
 )
 
@@ -52,14 +52,13 @@ def dataCleaner(path: str):
     return dataCleaned
 
 
-def modifyContactType(userInput: int, userID: int, staging: list):  # fulfills UPDATE requirement of project
+def modifyContactType(userInput: int, userID: int):  # fulfills UPDATE requirement of project
     '''
     takes in a boolean value: 1 for text and 0 for call
     this function is to update a preference about the way customer is notified about subscription
     '''
 
     query = ''
-    # profileData = list(set([(row[7], row[0]) for row in staging]))    # not needed
 
     if userInput == 1:
         query = "UPDATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
@@ -74,24 +73,33 @@ def modifyContactType(userInput: int, userID: int, staging: list):  # fulfills U
     print(f'Process completed.')
 
 
-def loadStagingCSV(path: str):
+def deleteAccount(givenUsername: str, recStatus: int = 1): # CHANGE ME: when this is called, pass the parameter
+
+    query = '''
+        UPDATE profile
+        SET recStatus = %s
+        WHERE custContID IN (
+                                SELECT profile.custContID
+                                FROM customer c
+                                WHERE c.custID = profile.custID
+                                AND c.username = %s
+                            );
     '''
-    reads in & parses Profile.CSV using dataCleaner() function
-    loading this CSV into a list to be passed throughout program is used in lieu of inserting data via staging table
-    '''
 
-    staging = dataCleaner(path)
-    staging = staging[1:]                                                  # this throws away the headers of the CSV
-
-    return staging
-
-
-# set up
-receiveStaging = loadStagingCSV('../../data/Profile.csv')
+    cursor.execute(query, (recStatus, givenUsername))
+    # cursor.execute(query, (givenUsername, ))
+    connection.commit()
 
 # gets input
 print(f'How do you want to receive notifications about your subscription?')
 userInput = input('Enter 1 for text or 0 for call: ')
 userID = input('Enter your ID to update your preferences: ')
-# invoke function
-modifyContactType(int(userInput), int(userID), receiveStaging)
+# call function
+modifyContactType(int(userInput), int(userID))
+
+
+# gets 2nd input
+print(f'This is for when you need to delete a customer.')
+username = input('Enter your username: ')
+# call function
+deleteAccount(username)
