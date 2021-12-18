@@ -66,8 +66,6 @@ def modifyContactType(userInput: int, userID: int, staging: list):  # fulfills U
     
     elif userInput == 0:
         query = "UPDATE profile SET contactType = " + str(userInput) + " WHERE custContID = " + str(userID) + ";"
-        # query = "UPDATE profile SET contactType = ? WHERE custContID = ?"
-        # query = "UPDATE profile SET contactType = userInput WHERE custContID = userID"
 
     cursor.execute(query)
     connection.commit()
