@@ -99,4 +99,9 @@ QUERIES = {
                         SELECT payID
                         FROM payment;
                         ''',
+        "GET_ALL_CUSTPRO":
+                        '''
+                        SELECT * 
+                        FROM all_customer_acc_info;
+                        '''
 }

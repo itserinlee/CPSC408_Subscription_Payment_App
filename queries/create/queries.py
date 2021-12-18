@@ -34,7 +34,7 @@ QUERIES = {
                         contactType BOOLEAN,
                         recUpdateDate DATE DEFAULT (CURRENT_DATE),
                         recStatus BOOLEAN DEFAULT FALSE,
-                        startDate DATE,
+                        startDate DATE DEFAULT (CURRENT_DATE),
                         endDate DATE,
                         CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID)
                         );
@@ -139,16 +139,29 @@ QUERIES = {
                         (custID, phoneNum, zipCode, state, city, streetAddress, contactType)
                         VALUES (%s, %s, %s, %s, %s, %s, %s)
                         ''',
-        "CREATE_CITY_TRIGGER":
-                '''
-                CREATE PROCEDURE CustByCity(
-                        IN city_name VARCHAR(50)
-                )
-                BEGIN
-                        SELECT c.custID AS customer_id, CONCAT(c.firstName, " ", c.lastName) AS full_name, c.username, c.recCreateDate AS date_joined
-                        FROM customer AS c
-                        INNER JOIN profile AS p ON p.custID = c.custID
-                        WHERE p.city = city_name;
-                END
-                '''
+        "CREATE_CITY_PROCEDURE":
+                        '''
+                        CREATE PROCEDURE CustByCity(
+                                IN city_name VARCHAR(50)
+                        )
+                        BEGIN
+                                SELECT c.custID AS customer_id, CONCAT(c.firstName, " ", c.lastName) AS full_name, c.username, c.recCreateDate AS date_joined
+                                FROM customer AS c
+                                INNER JOIN profile AS p ON p.custID = c.custID
+                                WHERE p.city = city_name;
+                        END
+                        ''',
+        "CREATE_CUSTPRO_VIEW":
+                        '''
+                        CREATE VIEW all_customer_acc_info AS
+                                SELECT c.custID AS customer_id, p.custContID AS profile_id, 
+                                CONCAT(c.firstName, " ", c.lastName) AS full_name,
+                                c.username AS username, c.password AS cust_password, p.phoneNum AS phone_no, 
+                                p.zipCode AS zip_code, p.state AS state, p.city AS city, 
+                                p.streetAddress AS street_addr, p.contactType AS contact_type, 
+                                p.recUpdateDate AS date_acc_updated, p.recStatus AS active, 
+                                p.startDate AS date_acc_created, p.endDate AS date_acc_deleted
+                                FROM customer AS c 
+                                INNER JOIN profile AS p ON c.custID = p.custID;
+                        '''
 }

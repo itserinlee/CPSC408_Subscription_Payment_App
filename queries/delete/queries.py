@@ -36,9 +36,13 @@ QUERIES = {
                                 AND c.username = %s
                         );
                         ''',
-        "DROP_CITY_TRIGGER":
+        "CHECK_CITY_PROCEDURE":
                         '''
                         DROP PROCEDURE IF EXISTS `CustByCity`
+                        ''',
+        "CHECK_CUSTPRO_VIEW":
+                        '''
+                        DROP VIEW IF EXISTS all_customer_acc_info;
                         '''
         # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }

@@ -35,8 +35,11 @@ class DB_Model():
                         print("Connection made.")
                         if self.delete_tables == True:
                                 self.check_tables()
+                                self.check_procedures()
+                                self.check_views()
                                 self.create_tables()
-                                self.create_triggers()
+                                self.create_procedures()
+                                self.create_views()
                                 self.parse_data()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
@@ -67,7 +70,6 @@ class DB_Model():
                 self.single_query(DEL_QUERIES["PRO_CHECK_TABLE"])
                 self.single_query(DEL_QUERIES["CUST_CHECK_TABLE"])
                 self.single_query(DEL_QUERIES["MAG_CHECK_TABLE"])
-                self.single_query(DEL_QUERIES["DROP_CITY_TRIGGER"])
 
         # creates all of the tables
         def create_tables(self):
@@ -79,8 +81,17 @@ class DB_Model():
                 self.single_query(CRE_QUERIES["PAY_CREATE_TABLE"])
                 print("Tables have been created.")
         
-        def create_triggers(self):
-                self.single_query(self.single_query(CRE_QUERIES["CREATE_CITY_TRIGGER"]))
+        def create_procedures(self):
+                self.single_query(self.single_query(CRE_QUERIES["CREATE_CITY_PROCEDURE"]))
+
+        def check_procedures(self):
+                self.single_query(DEL_QUERIES["CHECK_CITY_PROCEDURE"])
+
+        def create_views(self):
+                self.single_query(self.single_query(CRE_QUERIES["CREATE_CUSTPRO_VIEW"]))
+
+        def check_views(self):
+                self.single_query(DEL_QUERIES["CHECK_CUSTPRO_VIEW"])
 
         # function to execute a single query with no payload
         def single_query(self,query):
