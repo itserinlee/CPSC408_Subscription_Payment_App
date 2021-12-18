@@ -5,10 +5,16 @@ QUERIES = {
                         FROM magazine;
                         ''',
         "MAGS_GET_CATALOG":
-                '''
-                SELECT magID, magazineName, cost, category
-                FROM magazine;
-                ''',
+                        '''
+                        SELECT magID, magazineName, cost, category
+                        FROM magazine;
+                        ''',
+        "MAGS_GET_AVA_CATALOG":
+                        '''
+                        SELECT magID, magazineName, cost, category
+                        FROM magazine
+                        WHERE recStatus = TRUE;
+                        ''',
         "MAG_BY_NAME": 
                         '''
                         SELECT *
