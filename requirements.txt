@@ -1,3 +1,8 @@
-mysql_connector_repackaged==0.3.1
+ccard==0.1.9
+mysql_connector
+names==0.3.0
+password_generator==0.1.0
 python-dotenv==0.19.2
-random-address==1.1.1
+random_address==1.1.1
+random_password_generator==2.2.0
+randomname==0.1.5

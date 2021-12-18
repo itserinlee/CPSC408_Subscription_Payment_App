@@ -97,6 +97,36 @@ QUERIES = {
                         (subID, paymentAmount, paymentDate, paymentType, cardNumber, cardCode, recCreateDate)
                         VALUES (%s, %s, %s, %s, %s, %s, %s)
                         ''',
+        "MAG_INSERT_ALL":
+                        '''
+                        INSERT INTO magazine 
+                        (magID, magazineName, cost, category, recStatus, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ''',
+        "CUST_INSERT_ALL":
+                        '''
+                        INSERT INTO customer 
+                        (custID, firstName, lastName, username, password, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ''',
+        "PRO_INSERT_ALL":
+                        '''
+                        INSERT INTO profile 
+                        (custContID, custID, phoneNum, zipCode, state, city, streetAddress, contactType, startDate, endDate, recStatus, recUpdateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ''',
+        "SUB_INSERT_ALL":
+                        '''
+                        INSERT INTO subscription 
+                        (subID, magID, custID, numMagsMailed, paymentCompleted, startDate, endDate)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ''',
+        "PAY_INSERT_ALL":
+                        '''
+                        INSERT INTO payment 
+                        (payID, subID, paymentAmount, paymentDate, paymentType, cardNumber, cardCode, recCreateDate)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                        ''',
         "CUST_CREATE_NEW":
                         '''
                         INSERT INTO customer 
