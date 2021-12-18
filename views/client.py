@@ -22,15 +22,12 @@ def display_mag_catalog(db):
         db_helper.print_records(db.get_records(RE_QUERIES["MAGS_GET_CATALOG"]), 
         ["Order ID, Magazine Name, Cost, Category"])
 
-# add subscriptions (add by magazine id)
+# add subscriptions (add by username and magazine id)
+# def add_subscription(db, username, mag_id):
         # pay for magazine, which enters amount payed in payment
         # and ttriggers an update to the subscription table
 
                 # prompt user if they want to cancel transaction
-# def add_subscription(db, username, mag_id):
-#         db_helper.print_records(db.get_records_payload(RE_QUERIES["MAGS_GET_CATALOG"]), 
-#         ["Order ID, Magazine Name, Cost, Category"])
-#         return None
 
 # update contact method ()
 def update_contact_type(db, username):

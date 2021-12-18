@@ -103,5 +103,10 @@ QUERIES = {
                         '''
                         SELECT * 
                         FROM all_customer_acc_info;
+                        ''',
+        "GET_ALL_MAGSUB":
+                        '''
+                        SELECT * 
+                        FROM mag_sub_vw;
                         '''
 }

@@ -6,8 +6,9 @@ def stat_options():
         msg = "Choose from the following options:\n1) View all magazines.\
                 \n2) View all customers.\n3) View average costs of magazines by category. \
                 \n4) View magazines by year.\n5) View customers' info by city. \
-                \n6) View all account info of customers."
-        return db_helper.str_to_int(ui_helper.get_choice([i for i in range(1, 7)], msg=msg))
+                \n6) View all account information of customers.\
+                \n7) View all magazine information."
+        return db_helper.str_to_int(ui_helper.get_choice([i for i in range(1, 8)], msg=msg))
 
 def handle_stat_options(choice, db):
         if choice == 1:
@@ -22,6 +23,8 @@ def handle_stat_options(choice, db):
                 print_customers_by_city(db)
         elif choice == 6:
                 view_all_custpro(db)
+        elif choice == 7:
+                view_all_magsub(db)
 
 def print_all_customers(db):
         db_helper.print_records(db.get_records(RE_QUERIES["CUST_GET_ALL"]), ["First Name, Last Name, Username"])
@@ -53,5 +56,10 @@ def print_customers_by_city(db):
         db_helper.print_records(results, ["customer_id full_name username date_joined"])
 
 def view_all_custpro(db):
-        db_helper.print_records(db.get_records(RE_QUERIES["GET_ALL_CUSTPRO"]), ["customer_id profile_id full_name username password phone_no zip_code state city street_addr contact_type date_acc_updated active date_acc_created date_acc_deleted"])
+        db_helper.print_records(db.get_records(RE_QUERIES["GET_ALL_CUSTPRO"]),
+         ["customer_id profile_id full_name username password phone_no zip_code state city street_addr contact_type date_acc_updated active date_acc_created date_acc_deleted"])
+
+def view_all_magsub(db):
+        db_helper.print_records(db.get_records(RE_QUERIES["GET_ALL_MAGSUB"]),
+         ["mag_id mag_name mag_cost mag_category cust_id num_mags_received sub_id start_date end_date"])
 

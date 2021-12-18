@@ -163,5 +163,15 @@ QUERIES = {
                                 p.startDate AS date_acc_created, p.endDate AS date_acc_deleted
                                 FROM customer AS c 
                                 INNER JOIN profile AS p ON c.custID = p.custID;
+                        ''',
+        "CREATE_MAGSUB_VIEW":
+                        '''
+                        CREATE VIEW mag_sub_vw AS 
+                                SELECT s.magID AS mag_id, m.magazineName AS mag_name, 
+                                m.cost AS mag_cost, m.category AS mag_category,
+                                s.custID AS cust_id, s.numMagsMailed AS num_mags_received,
+                                s.subID AS sub_id, s.startDate AS start_date, s.endDate AS end_date
+                                FROM subscription AS s
+                                INNER JOIN magazine AS m ON m.magID = s.magID;
                         '''
 }

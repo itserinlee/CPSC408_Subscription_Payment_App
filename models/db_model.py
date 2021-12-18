@@ -89,9 +89,11 @@ class DB_Model():
 
         def create_views(self):
                 self.single_query(self.single_query(CRE_QUERIES["CREATE_CUSTPRO_VIEW"]))
+                self.single_query(self.single_query(CRE_QUERIES["CREATE_MAGSUB_VIEW"]))
 
         def check_views(self):
                 self.single_query(DEL_QUERIES["CHECK_CUSTPRO_VIEW"])
+                self.single_query(DEL_QUERIES["CHECK_MAGSUB_VIEW"])
 
         # function to execute a single query with no payload
         def single_query(self,query):

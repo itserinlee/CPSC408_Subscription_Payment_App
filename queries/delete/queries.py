@@ -43,6 +43,10 @@ QUERIES = {
         "CHECK_CUSTPRO_VIEW":
                         '''
                         DROP VIEW IF EXISTS all_customer_acc_info;
+                        ''',
+        "CHECK_MAGSUB_VIEW":
+                        '''
+                        DROP VIEW IF EXISTS mag_sub_vw;
                         '''
         # (Admin) create a query that deletes a magazine record (consider how it affects other tables)
 }
