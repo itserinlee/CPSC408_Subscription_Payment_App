@@ -80,6 +80,16 @@ QUERIES = {
                         INNER JOIN magazine AS m ON m.magID = s.magID
                         WHERE c.username = %s;
                         ''',
+        "MAGS_MAX_BUY_CAP":
+                        '''
+                        SELECT MAX(M.category) AS numOfCategory, P.zipCode AS zipCode
+                        FROM magazine AS M
+                        INNER JOIN subscription AS S ON M.magID = S.magID
+                        INNER JOIN customer AS C ON S.custID = C.custID
+                        INNER JOIN profile AS P ON C.custID = P.custID
+                        GROUP BY zipCode
+                        ORDER BY zipCode DESC;
+                        ''',            
         "MAGS_GET_DIST_YEARS":
                         '''
                         SELECT DISTINCT(YEAR(recCreateDate))
