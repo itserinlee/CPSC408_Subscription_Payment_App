@@ -25,7 +25,7 @@ class DB_Model():
                         if(not cloud):
                                 self.connection = mysql.connector.connect(
                                         # the IP Address of GCP MySQL Instance
-                                        host=os.getenv("hostname"),
+                                        host=os.getenv("hostname"), # all of these come from a .env file
                                         user=os.getenv("user"),
                                         password=os.getenv("password"),
                                         database=os.getenv("database"),
@@ -34,10 +34,10 @@ class DB_Model():
                                 )
                         elif(cloud):
                                 self.connection = mysql.connector.connect(
-                                        host = os.getenv("cloud_host"),
-                                        user = os.getenv("cloud_username"),
-                                        password = os.getenv("cloud_password"),
-                                        database = os.getenv("cloud_database")
+                                        host="34.122.83.45"# os.getenv("cloud_host"), # can also get these values from a .env file for security
+                                        user="rao" # os.getenv("cloud_username"),
+                                        password="password1" # os.getenv("cloud_password"),
+                                        database="magazine_subscriptions" # os.getenv("cloud_database")
                                 )
                         
                         
