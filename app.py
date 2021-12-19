@@ -8,7 +8,8 @@ def main():
     # parses csv data into Python instances stored in lists
     parser = Parser()
     # connects to MySQL DB, removes tables (if exits), and creates tables
-    db = DB_Model(parser, False)
+    #   second bool is if on cloud instance or not 
+    db = DB_Model(parser, False, True) # set the first bool to True after first run
 
     run_program(db)
 

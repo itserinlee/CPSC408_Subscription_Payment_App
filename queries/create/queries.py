@@ -36,7 +36,7 @@ QUERIES = {
                         recStatus BOOLEAN DEFAULT FALSE,
                         startDate DATE DEFAULT (CURRENT_DATE),
                         endDate DATE,
-                        CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID)
+                        CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID) ON UPDATE CASCADE ON DELETE CASCADE
                         );
                         ''',
         "SUB_CREATE_TABLE": 
@@ -49,8 +49,8 @@ QUERIES = {
                         startDate DATE,
                         endDate DATE,
                         numMagsMailed INTEGER,
-                        CONSTRAINT FK_subscription_magID FOREIGN KEY (magID) REFERENCES magazine(magID),
-                        CONSTRAINT FK_subscription_custID FOREIGN KEY (custID) REFERENCES customer(custID)
+                        CONSTRAINT FK_subscription_magID FOREIGN KEY (magID) REFERENCES magazine(magID) ON UPDATE CASCADE ON DELETE CASCADE,
+                        CONSTRAINT FK_subscription_custID FOREIGN KEY (custID) REFERENCES customer(custID) ON UPDATE CASCADE ON DELETE CASCADE
                         );
                         ''',
         "PAY_CREATE_TABLE":
@@ -64,7 +64,7 @@ QUERIES = {
                         paymentType BOOLEAN,
                         paymentDate DATE,
                         recCreateDate DATE DEFAULT (CURRENT_DATE),
-                        CONSTRAINT FK_subscription_subID FOREIGN KEY (subID) REFERENCES subscription(subID)
+                        CONSTRAINT FK_subscription_subID FOREIGN KEY (subID) REFERENCES subscription(subID) ON UPDATE CASCADE ON DELETE CASCADE
                         );
                         ''',
         "MAG_INSERT_RECS":

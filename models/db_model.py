@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class DB_Model():
-        def __init__(self, parser, delete_tables=True): # constructor with connection path to db
+        def __init__(self, parser, delete_tables=True, cloud=False): # constructor with connection path to db
                 # parser object that contains DB records as Python objects
                 self.parser = parser
                 # dict containing keys with a value of a list of their respective records
@@ -22,15 +22,25 @@ class DB_Model():
                 }
                 self.delete_tables = delete_tables
                 try:
-                        self.connection = mysql.connector.connect(
-                                # the IP Address of GCP MySQL Instance
-                                host=os.getenv("hostname"),
-                                user=os.getenv("user"),
-                                password=os.getenv("password"),
-                                database=os.getenv("database"),
-                                port=db_helper.str_to_int(os.getenv("port")),
-                                auth_plugin='mysql_native_password'
-                        )
+                        if(not cloud):
+                                self.connection = mysql.connector.connect(
+                                        # the IP Address of GCP MySQL Instance
+                                        host=os.getenv("hostname"),
+                                        user=os.getenv("user"),
+                                        password=os.getenv("password"),
+                                        database=os.getenv("database"),
+                                        port=db_helper.str_to_int(os.getenv("port")),
+                                        auth_plugin='mysql_native_password'
+                                )
+                        elif(cloud):
+                                self.connection = mysql.connector.connect(
+                                        host = os.getenv("cloud_host"),
+                                        user = os.getenv("cloud_username"),
+                                        password = os.getenv("cloud_password"),
+                                        database = os.getenv("cloud_database")
+                                )
+                        
+                        
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
                         if self.delete_tables == True:
