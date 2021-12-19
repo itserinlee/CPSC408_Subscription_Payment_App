@@ -9,7 +9,7 @@ def main():
     parser = Parser()
     # connects to MySQL DB, removes tables (if exits), and creates tables
     #   second bool is if on cloud instance or not 
-    db = DB_Model(parser, False, True) # set the first bool to True after first run
+    db = DB_Model(parser, False, True) # set the first bool to True for first run
 
     run_program(db)
 

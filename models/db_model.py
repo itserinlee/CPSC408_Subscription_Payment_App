@@ -34,10 +34,10 @@ class DB_Model():
                                 )
                         elif(cloud):
                                 self.connection = mysql.connector.connect(
-                                        host="34.122.83.45"# os.getenv("cloud_host"), # can also get these values from a .env file for security
-                                        user="rao" # os.getenv("cloud_username"),
-                                        password="password1" # os.getenv("cloud_password"),
-                                        database="magazine_subscriptions" # os.getenv("cloud_database")
+                                        host="34.122.83.45", # os.getenv("cloud_host"), # can also get these values from a .env file for security
+                                        user="rao",  # os.getenv("cloud_username"),
+                                        password="password1",  # os.getenv("cloud_password"),
+                                        database="magazine_subscriptions",  # os.getenv("cloud_database")
                                 )
                         
                         
