@@ -65,7 +65,7 @@ class ui_helper():
                         prt_cities += str_add
                 user_city = ""
                 while is_valid == False:
-                        user_city = input(f"Choose one of the following cities to filter customer results by:\
+                        user_city = input(f"Choose which attribute you would like to index: \
                         \n{prt_cities}\n")
                         if user_city in cits:
                                 is_valid = True
