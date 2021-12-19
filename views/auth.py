@@ -40,6 +40,9 @@ def user_login(db):
                 if username_exists(username, db) == False:
                         username = ui_helper.get_str("Error: Username does not exist. Please re-enter username:\n")
                         continue
+                if username_active(username, db) == False:
+                        print(f"Error: username {username} account is no longer active. Please contact the Database manager.")
+                        return
                 password = ui_helper.get_str("Please enter your password:\n")
                 if password != get_user_password(username, db):
                         print("Error: Incorrect password - please try again.")
@@ -77,6 +80,9 @@ def user_login(db):
 # user login helper methods
 def username_exists(username, db):
         return db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], tuple([username, ]), "username") != None
+
+def username_active(username, db):
+        return db.get_record(RE_QUERIES["REC_STATUS_BY_USERNAME"], tuple([username, ]), "username")[0] == 1
 
 def get_user_password(username, db):
         return db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], tuple([username, ]), "username")[4]

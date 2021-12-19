@@ -15,6 +15,13 @@ pip3 install -r requirements.txt
 ```
 python3 app.py
 ```
+3. Credetials
+```
+host="34.122.83.45"
+user="rao"
+password="password1"
+database="magazine_subscriptions"
+```
 
 server credentials are already hard coded, but capability exists to use a more secure .env style.
 

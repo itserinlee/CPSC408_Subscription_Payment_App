@@ -63,6 +63,13 @@ QUERIES = {
                         FROM customer
                         WHERE username = %(username)s;
                         ''',
+        "REC_STATUS_BY_USERNAME":
+                        '''
+                        SELECT p.recStatus AS active
+                        FROM customer AS c
+                        INNER JOIN profile AS p ON c.custID = p.custID
+                        WHERE c.username = %(username)s;
+                        ''',
         "GET_DIST_CITIES":
                         '''
                         SELECT DISTINCT(city)

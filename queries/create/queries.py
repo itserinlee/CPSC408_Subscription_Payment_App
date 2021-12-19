@@ -33,7 +33,7 @@ QUERIES = {
                         streetAddress VARCHAR(150) NOT NULL,
                         contactType BOOLEAN,
                         recUpdateDate DATE DEFAULT (CURRENT_DATE),
-                        recStatus BOOLEAN DEFAULT FALSE,
+                        recStatus BOOLEAN DEFAULT TRUE,
                         startDate DATE DEFAULT (CURRENT_DATE),
                         endDate DATE,
                         CONSTRAINT FK_profile_custID FOREIGN KEY (custID) REFERENCES customer(custID) ON UPDATE CASCADE ON DELETE CASCADE
