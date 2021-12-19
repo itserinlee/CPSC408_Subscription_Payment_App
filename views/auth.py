@@ -1,4 +1,5 @@
 from random import randint
+from controllers.db_helper import db_helper
 from controllers.ui_helper import ui_helper
 from queries.read.queries import QUERIES as RE_QUERIES
 from queries.create.queries import QUERIES as CRE_QUERIES
@@ -57,8 +58,13 @@ def user_login(db):
                 elif choice == 2:
                         # present magazine catalog
                         client.display_mag_catalog(db)
-                # elif choice == 3:
-                #         # add magazine to subscription by username and mag_id
+                elif choice == 3:
+                        # add magazine to subscription by username and mag_id
+                        mag_id = db_helper.str_to_int(input("Enter the integer ID of the magazine that want to add:\n"))
+                        if mag_id == None:
+                                print(f"Error: Expected an integer value but instead received - {mag_id}.")
+                                continue
+                        client.add_subscription(db, username, mag_id)
                 elif choice == 4:
                         # update contact method (0 - )
                         client.update_contact_type(db, username)

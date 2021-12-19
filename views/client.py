@@ -3,6 +3,8 @@ from controllers.db_helper import db_helper
 from queries.read.queries import QUERIES as RE_QUERIES
 from queries.delete.queries import QUERIES as DE_QUERIES
 from queries.update.queries import QUERIES as UP_QUERIES
+from queries.create.queries import QUERIES as CE_QUERIES
+from datetime import date
 
 # user specific methods which are all done by username
 def present_options():
@@ -22,12 +24,31 @@ def display_mag_catalog(db):
         db_helper.print_records(db.get_records(RE_QUERIES["MAGS_GET_CATALOG"]), 
         ["Order ID, Magazine Name, Cost, Category"])
 
-# add subscriptions (add by username and magazine id)
-# def add_subscription(db, username, mag_id):
+# add subscriptions (add by username and magazine id) -> transaction with rollback capability
+def add_subscription(db, username, mag_id):
+        # committing before transaction begins (serves as a checkpoint)
+        db.connection.commit()
+        price = db.get_record(RE_QUERIES["MAG_PRICE_BY_ID"], (int(mag_id), ), "mag_id")
+        if price == None:
+                print("Error: An invalid magazine id was entered.")
+                return
+        price = price[0]
         # pay for magazine, which enters amount payed in payment
-        # and ttriggers an update to the subscription table
+        user_choice = ui_helper.get_choice([i for i in range(2)], f"This magazine costs {price}.Please confirm below if you would like to pay for it.\nEnter 1 for yes or 0 for no:")
+        if user_choice == 0:
+                return
+        cust_id = db.get_record(RE_QUERIES["CUST_GET_BY_USERNAME"], (username, ), "username")[0]
+        # and triggers an update to the subscription table
+        db.single_insert(CE_QUERIES["SUB_ADD_ONE"], (int(mag_id), int(cust_id), 1, 1, date.today()), True)
+        # prompt user if they want to cancel transaction
+        commit_transaction = ui_helper.get_choice([i for i in range(2)], f"Transaction processed.\nEnter 1 to continue or 0 to cancel transaction:")
+        if commit_transaction == 0:
+                db.connection.rollback()
+                print("Success: Transaction has be undone (rolledback).")
+        elif commit_transaction == 1:
+                db.connection.commit()
+                print("Success: Transaction has saved (committed).")
 
-                # prompt user if they want to cancel transaction
 
 # update contact method ()
 def update_contact_type(db, username):

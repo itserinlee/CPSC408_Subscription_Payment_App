@@ -154,10 +154,11 @@ class DB_Model():
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
 
         # function for bulk inserting records
-        def single_insert(self, query, record):
+        def single_insert(self, query, record, do_not_commit=False):
                 try:
                         self.cursor.execute(query,record)
-                        self.connection.commit()
+                        if do_not_commit == False:
+                                self.connection.commit()
                         print("Query executed..")
                 except Exception as err:
                         print(f"Error: An error occurred in trying bulk insert records.\n{err}")

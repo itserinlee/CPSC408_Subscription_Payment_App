@@ -121,6 +121,12 @@ QUERIES = {
                         (subID, magID, custID, numMagsMailed, paymentCompleted, startDate, endDate)
                         VALUES (%s, %s, %s, %s, %s, %s, %s)
                         ''',
+        "SUB_ADD_ONE":
+                        '''
+                        INSERT INTO subscription
+                        (magID, custID, numMagsMailed, paymentCompleted, startDate)
+                        VALUES (%s, %s, %s, %s, %s)
+                        ''',
         "PAY_INSERT_ALL":
                         '''
                         INSERT INTO payment 

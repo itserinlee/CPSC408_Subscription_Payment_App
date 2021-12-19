@@ -27,7 +27,12 @@ QUERIES = {
                         FROM magazine
                         WHERE category LIKE "%(%s)%";
                         ''',
-                        # TODO fix this query
+        "MAG_PRICE_BY_ID":
+                        '''
+                        SELECT cost
+                        FROM magazine
+                        WHERE magID = %(mag_id)s;
+                        ''',
         "MAGS_COUNT_BY_YEAR":
                         '''
                         SELECT COUNT(magID) AS CountOfMag

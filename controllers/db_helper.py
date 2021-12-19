@@ -24,6 +24,9 @@ class db_helper():
         def str_to_int(s) -> int:
                 try:
                         int(s)
+                except ValueError as err:
+                        print(f"Error: Cannot convert {s} to an int.\n{err}")
+                        return None
                 except TypeError as err:
                         print(f"Error: Cannot convert {s} to an int.\n{err}")
                         return None
