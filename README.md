@@ -8,9 +8,14 @@ supplied is our program for interacting with our Magazine Subscription Database.
 
 # to use
 
-1. pip3 install -r requirements.txt
-2. python3 app.py
-
+1. 
+```
+pip3 install -r requirements.txt
+```
+2.
+```
+python3 app.py
+```
 
 server credentials are already hard coded, but capability exists to use a more secure .env style.
 
