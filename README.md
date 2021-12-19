@@ -7,12 +7,11 @@ supplied is our program for interacting with our Magazine Subscription Database.
 
 
 # to use
-
-1. 
+1. Install pip packages.
 ```
 pip3 install -r requirements.txt
 ```
-2.
+2. Run the application.
 ```
 python3 app.py
 ```
