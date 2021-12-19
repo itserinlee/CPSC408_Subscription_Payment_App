@@ -9,8 +9,8 @@ def stat_options():
                 \n2) View all customers.\n3) View average costs of magazines by category. \
                 \n4) View magazines by year.\n5) View customers' info by city. \
                 \n6) View all account information of customers.\
-                \n7) View all magazine information."
-        return db_helper.str_to_int(ui_helper.get_choice([i for i in range(1, 8)], msg=msg))
+                \n7) View all magazine information.\n8) View most popular category by zip code."
+        return db_helper.str_to_int(ui_helper.get_choice([i for i in range(1, 9)], msg=msg))
 
 def handle_stat_options(choice, db):
         last_query_records, last_query_headers = [], []
@@ -28,6 +28,8 @@ def handle_stat_options(choice, db):
                 last_query_records, last_query_headers = view_all_custpro(db)
         elif choice == 7:
                 last_query_records, last_query_headers = view_all_magsub(db)
+        elif choice == 8:
+                last_query_records, last_query_headers = print_max_cat_zip(db)
         prompt_report(last_query_records, last_query_headers)
                 
 
@@ -74,6 +76,10 @@ def view_all_magsub(db):
         db_helper.print_records(db.get_records(RE_QUERIES["GET_ALL_MAGSUB"]),
          ["mag_id mag_name mag_cost mag_category cust_id num_mags_received sub_id start_date end_date"])
         return db.get_records(RE_QUERIES["GET_ALL_MAGSUB"]), ["mag_id", "mag_name", "mag_cost", "mag_category", "cust_id", "num_mags_received", "sub_id", "start_date", "end_date"]
+
+def print_max_cat_zip(db):
+        db_helper.print_records(db.get_records(RE_QUERIES["MAGS_MAX_BUY_CAP"]), ["Category, Zip Code"])
+        return db.get_records(RE_QUERIES["MAGS_MAX_BUY_CAP"]), ["Category", "Zip Code"]
 
 def prompt_report(last_query_records, last_query_headers):
         msg = "Would you like to generate a report of the results:\
