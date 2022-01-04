@@ -1,5 +1,5 @@
 # Payment Processing App for Magazine Subscriptions
-***Database Management - CPSC 408, (Fall 2021)***
+***Database Management - CPSC 408, Fall 2021***
 
 *Tarek El-Hajjaoui, Erin Lee, Connor Lydon*
 
