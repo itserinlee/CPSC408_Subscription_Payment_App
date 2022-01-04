@@ -4,16 +4,20 @@
 *Tarek El-Hajjaoui, Erin Lee, Connor Lydon*
 
 
-### Summary
+### About
 
 ***
 
 This a payment processing console app for magazine subscriptions. The database runs on a cloud instance. Instructions for interacting with the app below.
 
 
-### Design Process for Database *(Entity-Relationship Model)*
-<img src=https://github.com/itserinlee/CPSC408_Subscription_Payment_App/blob/main/meta_info/er_diagram.png title="Entity-Relationship Model" width="50%"/>
+### Entity-Relationship Model
 
+***
+
+<p align="center">
+<img src=https://github.com/itserinlee/CPSC408_Subscription_Payment_App/blob/main/meta_info/er_diagram.png title="Entity-Relationship Model" width="50%"/>
+</p>
 
 ### Instructions
 
