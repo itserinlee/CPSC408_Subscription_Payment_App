@@ -16,7 +16,7 @@ This a payment processing console app for magazine subscriptions. The database r
 ***
 
 <p align="center">
-<img src=https://github.com/itserinlee/CPSC408_Subscription_Payment_App/blob/main/meta_info/er_diagram.png title="Entity-Relationship Model" width="50%"/>
+<img src=https://github.com/itserinlee/CPSC408_Subscription_Payment_App/blob/main/meta_info/er_diagram.png title="Entity-Relationship Model" width="75%"/>
 </p>
 
 ### Instructions
