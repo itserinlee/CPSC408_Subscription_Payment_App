@@ -1,12 +1,12 @@
-# Python_SQL_MagazineApp
+# Payment Processing App for Magazine Subscriptions
 Tarek El-Hajjaoui, Erin Lee, Connor Lydon
 
 
-# summary
+### Summary
 supplied is our program for interacting with our Magazine Subscription Database. It is already initialized and set up to run on the cloud instance. Follow the instructions below 
 
 
-# to use
+### Instructions
 1. Install pip packages.
 ```
 pip3 install -r requirements.txt
@@ -15,36 +15,35 @@ pip3 install -r requirements.txt
 ```
 python3 app.py
 ```
-3. Credetials
-```
-host="34.122.83.45"
-user="rao"
-password="password1"
-database="magazine_subscriptions"
-```
-
-server credentials are already hard coded, but capability exists to use a more secure .env style.
-
-if running the program for the first time in a local or cloud environment, set the first boolean in the DB_Model to true to build the tables.
-
-the second boolean indicates if this will run on a server instance or not. it is preset for a server instance.
-
-# references
-
-referenced previous code, notes and slides from class.
 
 
-# files included
-app.py -- main program
-controllers/db_helper -- miscellaneous database functions
-controllers/ui_helper -- miscellaneous user interface functions
-data/ -- this is a directory contains a flat file with all the info and individual CSV tables, this also includes randomly generated data
-generateReport.py -- this exports the data to a CSV depending on what the user selects
-meta_info/ -- contains outline and rubric for the project
-models/parser.py -- this contains the parser for reading through flat files and reading them into the object types
-models/db_model.py -- this is the main database interface that works with the MYSQL database
-models/record_types -- these are the object types that are read into before putting them into the database
-queries/ -- this contains all of the queries that are used in the program
-requirements.txt -- this contains all of the required packages
-test.py -- this is a function that prints the .env contents
-views/ -- this contains the ui and how each user is treated differently
+### Source files
+<dl>
+  <dt>app.py</dt>
+  <dd>main program</dd>
+  <dt>controllers/db_helper.py</dt>
+  <dd>database functions</dd>
+  <dt>controllers/ui_helper.py</dt>
+  <dd>user interface functions</dd>
+  <dt>data/ </dt>
+  <dd>a directory containing a flat file with individual CSV tables & randomly generated data</dd>
+  <dt>generateReport.py</dt>
+  <dd>exports data to a CSV depending on what the user selects</dd>
+  <dt>meta_info/ </dt>
+  <dd>directory containing outline & rubric for the project</dd>
+  <dt>models/parser.py</dt>
+  <dd>contains the parser for reading through flat files & reading them into the object types</dd>
+  <dt>models/db_model.py</dt>
+  <dd>the main database interface that works with the MYSQL database</dd>
+  <dt>models/record_types.py</dt>
+  <dd>the object types that are read into before putting them into the database</dd>  
+  <dt>queries/ </dt>
+  <dd>directory containing all of the queries that are used in the program</dd>
+  <dt>requirements.txt</dt>
+  <dd>contains all of the required packages</dd>
+  <dt>test.py</dt>
+  <dd>contains a function that prints the .env contents</dd>
+  <dt>views/ </dt>
+  <dd>directory containing the ui & how each user is treated differently</dd>
+</dl>
+
