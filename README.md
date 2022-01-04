@@ -1,9 +1,11 @@
 # Payment Processing App for Magazine Subscriptions
-Tarek El-Hajjaoui, Erin Lee, Connor Lydon
+***Database Management - CPSC 408, (Fall 2021)***
+
+*Tarek El-Hajjaoui, Erin Lee, Connor Lydon*
 
 
 ### Summary
-supplied is our program for interacting with our Magazine Subscription Database. It is already initialized and set up to run on the cloud instance. Follow the instructions below 
+This a payment processing console app for magazine subscriptions. The database runs on a cloud instance. Instructions for interacting with the app below.
 
 
 ### Instructions
