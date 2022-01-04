@@ -8,7 +8,7 @@
 
 ***
 
-This a payment processing console app for magazine subscriptions. The database runs on a cloud instance. Instructions for interacting with the app below.
+This is a payment processing console app for magazine subscriptions. The database runs on a cloud instance. Instructions for interacting with the app below.
 
 
 ### Entity-Relationship Model
