@@ -19,6 +19,8 @@ This a payment processing console app for magazine subscriptions. The database r
 <img src=https://github.com/itserinlee/CPSC408_Subscription_Payment_App/blob/main/meta_info/er_diagram.png title="Entity-Relationship Model" width="80%"/>
 </p>
 
+###### · designed using Lucidchart ·
+
 ### Instructions
 
 ***
