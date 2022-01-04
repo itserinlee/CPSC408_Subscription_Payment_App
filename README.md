@@ -5,10 +5,18 @@
 
 
 ### Summary
+
+***
+
 This a payment processing console app for magazine subscriptions. The database runs on a cloud instance. Instructions for interacting with the app below.
+
+***
 
 
 ### Instructions
+
+***
+
 1. Install pip packages.
 ```
 pip3 install -r requirements.txt
@@ -17,6 +25,8 @@ pip3 install -r requirements.txt
 ```
 python3 app.py
 ```
+
+***
 
 
 ### Source files
